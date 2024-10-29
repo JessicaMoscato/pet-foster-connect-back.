@@ -1,0 +1,31 @@
+#! docker-compose pour lancer l'environnement de développement
+services:
+  app:  # Définition du service pour l'application
+    build:  # Configuration de la construction de l'image Docker
+      context: .  # Contexte de construction : le répertoire courant
+      dockerfile: Dockerfile.dev  # Utilisation du Dockerfile.dev pour la construction
+    ports:
+      - 3000:3000  # Exposition du port 3000 de l'hôte vers le conteneur
+    container_name: pet-foster-connect-app-dev  # Nom du conteneur pour l'application
+    depends_on:
+      - db  # L'application dépend du service 'db' (base de données)
+
+    # Les sources de l'appli sont dans le répertoire courant. On veut pouvoir
+    # modifier les sources (on est en dev !!!). On peut faire un volume
+    # entre le répertoire de travail du conteneur et le répertoire courant.
+    volumes:
+      - ./:/usr/src/app  # Monté le répertoire courant dans le conteneur
+
+  db:  # Définition du service pour la base de données PostgreSQL
+    image: postgres  # Utilisation de l'image officielle de PostgreSQL
+    container_name: pet-foster-connect-db-dev  # Nom du conteneur pour la base de données
+    env_file:
+      - .env  # Chargement des variables d'environnement à partir du fichier .env
+    volumes:
+      # Ce volume contient des scripts SQL ou des fichiers d'initialisation
+      - ./data/:/docker-entrypoint-initdb.d/  # Monté le répertoire 'data' pour initialiser la DB
+      - pet-foster-connect-volume-dev:/var/lib/postgresql/data  # Volume pour persister les données de la DB
+
+# Définition des volumes utilisés par les services
+volumes:
+  pet-foster-connect-volume-dev:  # Définition d'un volume persistant pour PostgreSQL

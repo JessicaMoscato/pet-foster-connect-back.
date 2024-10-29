@@ -16,7 +16,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 
-// Configuration de CORS a revoie avant déploiement
+// Configuration de CORS a retravailler avec option avant déploiement
 app.use(
   cors({
     origin: process.env.CORS,
@@ -32,7 +32,7 @@ app.use("/api", mainRouter);
 
 
 // Démarrage du serveur sur le port spécifié dans .env ou sur 3001 par défaut
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(
     `🚀 Serveur API démarré à l'adresse : http://localhost:${PORT}/api`
