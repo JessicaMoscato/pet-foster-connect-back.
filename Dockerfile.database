@@ -6,7 +6,9 @@ FROM postgres
 # Lors du démarrage du conteneur, tous les scripts présents dans 
 # /docker-entrypoint-initdb.d/ seront exécutés, permettant ainsi 
 # de créer automatiquement les tables nécessaires dans la base de données.
-COPY ./src/data/create_tables.sql /docker-entrypoint-initdb.d/create_tables.sql
+COPY ./data/create_tables.sql /docker-entrypoint-initdb.d/create_tables.sql
+
+
 
 # Expose le port 5432, qui est le port standard pour les connexions 
 # à PostgreSQL. Cela permet aux autres services ou conteneurs de 
