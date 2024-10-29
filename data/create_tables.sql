@@ -1,22 +1,22 @@
-DROP TABLE IF EXISTS animal;
-DROP TABLE IF EXISTS association;
-DROP TABLE IF EXISTS family;
-DROP TABLE IF EXISTS "user";  
 DROP TABLE IF EXISTS ask;
+DROP TABLE IF EXISTS animal;
+DROP TABLE IF EXISTS family;
+DROP TABLE IF EXISTS association;
+DROP TABLE IF EXISTS "user";
 
 CREATE TABLE "user" (
-  id          INT NOT NULL SERIAL PRIMARY KEY,  
+  id          SERIAL PRIMARY KEY,
   lastname    VARCHAR(50) NOT NULL,
   firstname   VARCHAR(50) NOT NULL,
-  email        VARCHAR(100) NOT NULL,
-  password     VARCHAR(255) NOT NULL,
-  role         VARCHAR(20),
-  created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP  
+  email       VARCHAR(100) NOT NULL,
+  password    VARCHAR(255) NOT NULL,
+  role        VARCHAR(20),
+  created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE family (
-  id                 INT NOT NULL SERIAL PRIMARY KEY,
+  id                 SERIAL PRIMARY KEY,
   address            VARCHAR(255) NOT NULL,
   phone              VARCHAR(15) NOT NULL,
   number_of_children INT,
@@ -24,13 +24,13 @@ CREATE TABLE family (
   garden             BOOLEAN NOT NULL,
   description        TEXT,
   profile_photo      VARCHAR(255),
-  id_user            ENTITY FOREIGN KEY NOT NULL UNIQUE,  
+  id_user            INT NOT NULL UNIQUE REFERENCES "user"(id),
   created_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE association (
-  id                 INT NOT NULL SERIAL PRIMARY KEY,
+  id                 SERIAL PRIMARY KEY,
   rna_number         VARCHAR(42) UNIQUE NOT NULL,
   representative     VARCHAR(100) NOT NULL,
   address            VARCHAR(255) NOT NULL,
@@ -38,13 +38,13 @@ CREATE TABLE association (
   description        TEXT,
   status             VARCHAR(15) NOT NULL,
   profile_photo      VARCHAR(255),
-  id_user            ENTITY FOREIGN KEY NOT NULL UNIQUE,  
+  id_user            INT NOT NULL UNIQUE REFERENCES "user"(id),
   created_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE animal (
-  id                INT NOT NULL SERIAL PRIMARY KEY,
+  id               SERIAL PRIMARY KEY,
   name             VARCHAR(50) NOT NULL,
   species          VARCHAR(30) NOT NULL,
   breed            VARCHAR(50) NOT NULL,
@@ -56,18 +56,19 @@ CREATE TABLE animal (
   photo1           VARCHAR(255),
   photo2           VARCHAR(255),
   photo3           VARCHAR(255),
-   id_family        ENTITY FOREIGN KEY NULL,    
-  id_association   ENTITY FOREIGN KEY NOT NULL,  
+  id_family        INT REFERENCES family(id),
+  id_association   INT NOT NULL REFERENCES association(id),
   created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE ask (
-  id_family  INT PRIMARY KEY FOREIGN KEY NOT NULL,
-  id_animal  INT PRIMARY KEY FOREIGN KEY NOT NULL,
-  status       VARCHAR(15) NOT NULL,
-  created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  id_family  INT REFERENCES family(id),
+  id_animal  INT REFERENCES animal(id),
+  status     VARCHAR(15) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id_family, id_animal)
 );
 
 -- Fonction pour mettre à jour le timestamp
@@ -77,7 +78,8 @@ BEGIN
     NEW.updated_at = CURRENT_TIMESTAMP;
     RETURN NEW;
 END; 
-$$ LANGUAGE plpgsql;
+$$
+ LANGUAGE plpgsql;
 
 -- Triggers pour mettre à jour les timestamps
 CREATE TRIGGER update_animal_timestamp

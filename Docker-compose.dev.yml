@@ -1,6 +1,7 @@
 version: '2.2'  # Spécifie la version de Docker Compose
 
 services:
+  # !Configuration du service de l'application Node.js
   app:  # Définition du service pour l'application
     build:  # Configuration de la construction de l'image Docker
       context: .  # Contexte de construction : le répertoire courant
@@ -15,7 +16,8 @@ services:
     volumes:
       - ./:/usr/src/app  # Monté le répertoire courant dans le conteneur
 
-  db:  # Définition du service pour la base de données PostgreSQL
+ # !Configuration du service de base de données PostgreSQL
+  db:  
     image: postgres  # Utilisation de l'image officielle de PostgreSQL
     container_name: pet-foster-connect-db-dev  # Nom du conteneur pour la base de données
     env_file:
