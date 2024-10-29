@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS "user";
 DROP TABLE IF EXISTS ask;
 
 CREATE TABLE "user" (
-  id          INT NOT NULL SERIAL PRIMARY KEY,  -- Utilisation de SERIAL pour générer automatiquement l'ID
+  id          INT NOT NULL SERIAL PRIMARY KEY,  
   lastname    VARCHAR(50) NOT NULL,
   firstname   VARCHAR(50) NOT NULL,
   email        VARCHAR(100) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE family (
   garden             BOOLEAN NOT NULL,
   description        TEXT,
   profile_photo      VARCHAR(255),
-  id_user            ENTITY FOREIGN KEY NOT NULL UNIQUE,  -- clé étrangère vers USER (ASSOCIER)
+  id_user            ENTITY FOREIGN KEY NOT NULL UNIQUE,  
   created_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -38,7 +38,7 @@ CREATE TABLE association (
   description        TEXT,
   status             VARCHAR(15) NOT NULL,
   profile_photo      VARCHAR(255),
-  id_user            ENTITY FOREIGN KEY NOT NULL UNIQUE,  -- clé étrangère vers USER (DEFINIR)
+  id_user            ENTITY FOREIGN KEY NOT NULL UNIQUE,  
   created_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -56,8 +56,8 @@ CREATE TABLE animal (
   photo1           VARCHAR(255),
   photo2           VARCHAR(255),
   photo3           VARCHAR(255),
-   id_family        ENTITY FOREIGN KEY NULL,      -- clé étrangère vers FAMILY (HEBERGER)
-  id_association   ENTITY FOREIGN KEY NOT NULL,  -- clé étrangère vers ASSOCIATION (DETENIR)
+   id_family        ENTITY FOREIGN KEY NULL,    
+  id_association   ENTITY FOREIGN KEY NOT NULL,  
   created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
