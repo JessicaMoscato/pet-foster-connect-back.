@@ -1,4 +1,4 @@
-version: '2.2'  # Spécifie la version de Docker Compose
+ # Spécifie la version de Docker Compose
 
 services:
   # !Configuration du service de l'application Node.js
