@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "DOTENV_CONFIG_PATH=.env.dev nodemon index.js"
+    "dev": "DOTENV_CONFIG_PATH=.env nodemon index.js"
   },
   "keywords": [],
   "author": "Charlotte BEC, Cécile DUC DIT CATTY, Sujin KIM, Jessica MOSCATO, Mayya RENAULT",

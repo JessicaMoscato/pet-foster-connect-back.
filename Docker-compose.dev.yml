@@ -10,7 +10,7 @@ services:
       - "3000:3000"  # Exposition du port 3000 de l'hôte vers le conteneur
     container_name: pet-foster-connect-app-dev  # Nom du conteneur pour l'application
     env_file:
-      - .env.dev  # Chargement des variables d'environnement à partir du fichier .env
+      - .env  # Chargement des variables d'environnement à partir du fichier .env
     depends_on:
       - db  # L'application dépend du service 'db' (base de données)
     volumes:
@@ -21,7 +21,7 @@ services:
     image: postgres  # Utilisation de l'image officielle de PostgreSQL
     container_name: pet-foster-connect-db-dev  # Nom du conteneur pour la base de données
     env_file:
-      - .env.dev  # Chargement des variables d'environnement à partir du fichier .env
+      - .env  # Chargement des variables d'environnement à partir du fichier .env
     volumes:
       - ./data/:/docker-entrypoint-initdb.d/  # Monté le répertoire 'data' pour initialiser la DB
       - pet-foster-connect-volume-dev:/var/lib/postgresql/data  # Volume pour persister les données de la DB
