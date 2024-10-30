@@ -6,11 +6,12 @@ export class Family extends Model {}
 
 Family.init(
   {
-    id: {
+    //*possible si changement du comportement par defaut 
+/*     id: {   
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-    },
+    }, */
     address: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -18,18 +19,22 @@ Family.init(
     phone: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        is: /^[0-9]+$/i, // Vérifie que le numéro ne contient que des chiffres
+      },
     },
     number_of_children: {
       type: DataTypes.INTEGER,
-
+      defaultValue: 0,
     },
     number_of_animals: {
       type: DataTypes.INTEGER,
-
+      defaultValue: 0,
     },
     garden: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
+      
     },
     description: {
       type: DataTypes.TEXT,
@@ -43,10 +48,12 @@ Family.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       unique: true,
-      references: {
-        model: "user", // Indique que cette colonne fait référence à la table 'user'
-        key: "id", // Spécifie que la clé primaire dans la table 'user' à laquelle cette colonne fait référence est 'id'
-      },
+
+      //* pas indispensable
+      /* references: {
+        model: "user", 
+        key: "id", 
+      }, */
     },
   },
   {
@@ -55,4 +62,3 @@ Family.init(
   }
 );
 
-export default Family;

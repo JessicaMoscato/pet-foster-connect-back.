@@ -14,7 +14,8 @@ services:
     depends_on:
       - db  # L'application dépend du service 'db' (base de données)
     volumes:
-      - ./:/usr/src/app  # Monté le répertoire courant dans le conteneur
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules  # Monté le répertoire courant dans le conteneur
 
  # !Configuration du service de base de données PostgreSQL
   db:  
