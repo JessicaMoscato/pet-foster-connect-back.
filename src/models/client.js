@@ -1,5 +1,7 @@
 import { Sequelize } from "sequelize";
-import "dotenv/config";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const {
     POSTGRES_USER: user,
@@ -18,10 +20,14 @@ const sequelize = new Sequelize(`postgres://${user}:${password}@${host}:${port}/
     }
 })
 
-sequelize.authenticate()
-    .then(
-        () => console.log(`🚀 database ${database} connected`),
-        () => console.log(`❌ unable to connect to database ${database}`)
-    );
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log(`🚀 Database ${database} connected`);
+  })
+  .catch((err) => {
+    console.error(`❌ Unable to connect to database ${database}:`, err.message); // Affiche le message d'erreur
+    console.error("Details:", err); // Affiche l'objet d'erreur complet
+  });
 
 export default sequelize;
