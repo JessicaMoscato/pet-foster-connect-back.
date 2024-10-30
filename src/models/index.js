@@ -9,6 +9,7 @@ import ask from "./models/ask.js";
 family.hasMany(animal, {
   foreignKey: "code_family", // clé étrangère dans animal
 });
+
 animal.belongsTo(family, {
   foreignKey: "code_family", // clé étrangère dans animal
 });
