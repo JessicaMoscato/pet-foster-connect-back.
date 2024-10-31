@@ -1,3 +1,4 @@
+BEGIN ;
 DROP TABLE IF EXISTS ask;
 DROP TABLE IF EXISTS animal;
 DROP TABLE IF EXISTS family;
@@ -106,3 +107,5 @@ CREATE TRIGGER update_ask_timestamp
 BEFORE UPDATE ON ask
 FOR EACH ROW 
 EXECUTE FUNCTION update_timestamp();
+
+COMMIT;
