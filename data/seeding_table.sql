@@ -1,4 +1,6 @@
+BEGIN;
 -- Insertion dans la table user
+
 INSERT INTO "user" (lastname, firstname, email, password, role) VALUES
 ('Dupont', 'Jean', 'jean.dupont@email.com', 'hashedpassword1', 'family'),
 ('Martin', 'Sophie', 'sophie.martin@email.com', 'hashedpassword2', 'family'),
@@ -142,3 +144,4 @@ INSERT INTO animal (name, species, breed, gender, age, size, description, profil
 ('Misty', 'Chat', 'Balinese', 'F', 3, 'Moyen', 'Chat doux et sociable', '', '', '', '', 2),
 ('Rusty', 'Chat', 'Egyptian Mau', 'M', 5, 'Moyen', 'Chat énergique et curieux', '', '', '', '', 1),
 ('Pip', 'Chat', 'Khao Manee', 'F', 2, 'Petit', 'Chat joyeux et joueur', '', '', '', '', 2);
+COMMIT;
