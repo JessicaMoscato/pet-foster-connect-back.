@@ -9,3 +9,4 @@ export const router = Router();
 router.post("/", userController.createUser); // Route pour créer un nouvel utilisateur
 router.patch("/:id", userController.updateUser); // Route pour modifier un utilisateur par son ID
 router.delete("/:id", userController.deleteUser); // Route pour supprimer un utilisateur par son ID
+

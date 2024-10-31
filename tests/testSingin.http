@@ -1,8 +1,0 @@
-### Tester la connexion (login)
-POST http://localhost:3000/api/signin
-Content-Type: application/json
-
-{
-  "email": "test@example.com",
-  "password": "yourPassword"
-}
