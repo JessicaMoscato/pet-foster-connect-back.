@@ -39,10 +39,10 @@ Family.belongsTo(User, {
   as: "user",
 });
 
-//! Un utilisateur peut être associé à plusieurs associations 
-User.hasMany(Association, {
+//! Un utilisateur peut être associé à une association
+User.hasOne(Association, {
   foreignKey: "id_user", // clé étrangère dans association
-  as: "associations",
+  as: "association",
 });
 Association.belongsTo(User, {
   foreignKey: "id_user", // clé étrangère dans association
