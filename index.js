@@ -5,6 +5,7 @@ import { fileURLToPath } from "url"; // Utilisé pour manipuler les URL et obten
 import cors from "cors"; 
 import mainRouter from "./src/routers/mainRouter.js"; // Importation du routeur principal de l'application
 
+console.log(process.env);
 
 
 // ! Configuration des chemins d'accès aux fichiers

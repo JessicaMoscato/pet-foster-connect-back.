@@ -3,7 +3,7 @@ GET http://localhost:3000/api/animal
 Accept: application/json
 
 ### Requête GET pour récupérer un animal par son ID
-GET http://localhost:3000/api/animal/101
+GET http://localhost:3000/api/animal/10
 Accept: application/json
 
 ### Requête POST pour créer un nouvel animal pour une association
