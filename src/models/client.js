@@ -11,23 +11,27 @@ const {
     POSTGRES_PORT: port,
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${user}:${password}@${host}:${port}/${database}`,{
+// !Vérification de l'affichage des variables d'environnement pour le débogage
+console.log(`Connecting to database: ${database} at ${host}:${port}`);
+
+const sequelize = new Sequelize(`postgres://${user}:${password}@${host}:${port}/${database}`, {
     dialect: 'postgres',
     logging: false,
     define: {
         createdAt: 'created_at',
-        updatedAt: 'update_at',
+        updatedAt: 'updated_at', 
     }
-})
+});
 
+// !Authentification avec la base de données
 sequelize
   .authenticate()
   .then(() => {
     console.log(`🚀 Database ${database} connected`);
   })
   .catch((err) => {
-    console.error(`❌ Unable to connect to database ${database}:`, err.message); // Affiche le message d'erreur
-    console.error("Details:", err); // Affiche l'objet d'erreur complet
+    console.error(`❌ Unable to connect to database ${database}:`, err.message);
+    console.error("Details:", err);
   });
 
 export default sequelize;

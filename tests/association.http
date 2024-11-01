@@ -1,3 +1,8 @@
 ### Requête GET pour récupérer toutes les associations
-GET http://localhost:3000/api/associations 
+GET http://localhost:3000/api/association
+Accept: application/json
+
+### Requête GET pour récupérer une association par son ID
+GET http://localhost:3000/api/association/10
+Accept: application/json
 

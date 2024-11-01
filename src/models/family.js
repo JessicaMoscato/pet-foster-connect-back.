@@ -2,12 +2,12 @@ import { Model, DataTypes } from "sequelize";
 import sequelize from "./client.js";
 
 
-export class Family extends Model {}
+export default class Family extends Model {}
 
 Family.init(
   {
-    //*possible si changement du comportement par defaut 
-/*     id: {   
+    /*  //possible si changement du comportement par defaut 
+   id: {   
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -34,7 +34,6 @@ Family.init(
     garden: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      
     },
     description: {
       type: DataTypes.TEXT,

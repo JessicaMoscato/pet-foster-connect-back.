@@ -1,7 +1,7 @@
 //! Router secondaire pour les routes liées aux alertes (prefixe de route : /api/ask)
 
 import { Router } from "express";
-import { withTryCatch } from "../controllers/withTryCatchController.js";
+import withTryCatch from "../controllers/withTryCatchController.js";
 import { askController } from "../controllers/askController.js"; 
 
 export const router = Router();

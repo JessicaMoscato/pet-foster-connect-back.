@@ -1,7 +1,7 @@
 //! Router principal
 import { Router } from "express";
 import { errorHandler } from '../middlewares/errorhandle.js'; // Importation du gestionnaire d'erreurs global
-import { HttpError } from "../middlewares/httperror.js"; // Importation de la classe d'erreur HTTP personnalisée
+import  HttpError  from "../middlewares/httperror.js"; // Importation de la classe d'erreur HTTP personnalisée
 
 import { router as animalRouter } from "./animalRouter.js"; // Importation du routeur secondaire animalRouter
 import { router as askRouter } from "./askRouter.js"; // Importation du routeur secondaire askRouter
@@ -12,7 +12,7 @@ import { router as signinRouter } from "./signinRouter.js"; // Importation du ro
 
 
 
-export const router = Router();
+const router = Router();
 
 //! Ajout des sous-routeurs
 router.use("/association", associationRouter); // toutes les routes commencant par /association seront traitées par associationRouter
@@ -30,3 +30,6 @@ router.use((req, res, next)=>{
 
 // !Middleware de gestion globale des erreurs
 router.use(errorHandler); // Utilise le gestionnaire d'erreurs global pour traiter toutes les erreurs
+
+
+export default router; // Exportation par défaut du routeur

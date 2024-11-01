@@ -1,0 +1,34 @@
+
+### Visulaiser tous les utilisateurs
+GET http://localhost:3000/api/user
+Content-Type: application/json
+
+
+### Créer un nouvel utilisateur
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+  "firstname": "Jess",
+  "lastname": "M",
+  "password": "motdepasse123",
+  "email": "utilisateur@example.com",
+  "role": "family"
+}
+
+### Modifier un utilisateur
+PATCH http://localhost:3000/api/user/1
+Content-Type: application/json
+
+{
+  "firstname": "Jean",
+  "lastname": "Dupond",
+  "email": "jean.dupont@email.com",
+  "password": "hashedpassword11"
+ 
+}
+
+
+### effacer un utilisateur
+DELETE http://localhost:3000/api/user/27
+Accept: application/json

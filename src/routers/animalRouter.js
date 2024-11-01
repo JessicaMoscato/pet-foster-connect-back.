@@ -1,7 +1,7 @@
 //! Router secondaire pour les routes liées aux animaux (prefixe de route : /api/animal)
 
 import { Router } from "express";
-import { withTryCatch } from "../controllers/withTryCatchController.js";
+import  withTryCatch  from "../controllers/withTryCatchController.js";
 import { animalController } from "../controllers/animalController.js"; 
 
 export const router = Router();

@@ -7,7 +7,7 @@ services:
       context: .  # Contexte de construction : le répertoire courant
       dockerfile: Dockerfile.dev  # Utilisation du Dockerfile.dev pour la construction
     ports:
-      - "3000:3001"  # Exposition du port 3000 de l'hôte vers le conteneur
+      - "3000:3000"  # Exposition du port 3000 de l'hôte vers le conteneur
     container_name: pet-foster-connect-app-dev  # Nom du conteneur pour l'application
     env_file:
       - .env  # Chargement des variables d'environnement à partir du fichier .env

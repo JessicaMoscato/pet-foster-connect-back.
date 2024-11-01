@@ -1,10 +1,10 @@
-import sequelize from "./client";
+import sequelize from "./client.js";
 import { Model, DataTypes } from "sequelize";
 
-export class Association extends Model{}
+export default class Association extends Model{}
 
 Association.init({
-    repesentative: {
+    representative: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {

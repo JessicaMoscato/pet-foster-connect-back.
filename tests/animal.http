@@ -1,0 +1,35 @@
+### Requête GET pour récupérer tous les animaux
+GET http://localhost:3000/api/animal
+Accept: application/json
+
+### Requête GET pour récupérer un animal par son ID
+GET http://localhost:3000/api/animal/101
+Accept: application/json
+
+### Requête POST pour créer un nouvel animal pour une association
+POST http://localhost:3000/api/animal
+Content-Type: application/json
+
+{ 
+  "name": "test",
+  "species": "Panthera leo",
+  "breed": "Berger Allemand",
+  "gender":"M",
+  "age": 5,
+  "size":"grand",
+  "id_association":1
+
+}
+
+### Requête PATCH pour modifier un animal par son ID
+PATCH http://localhost:3000/api/animal/85
+Content-Type: application/json
+
+{
+  "name": "Lion modifié",
+  "age": 6
+}
+
+### Requête DELETE pour supprimer un animal par son ID
+DELETE http://localhost:3000/api/animal/101
+Accept: application/json

@@ -1,21 +1,25 @@
-BEGIN ;
+BEGIN;
+
+-- Suppression des tables existantes si elles sont déjà présentes
 DROP TABLE IF EXISTS ask;
 DROP TABLE IF EXISTS animal;
 DROP TABLE IF EXISTS family;
 DROP TABLE IF EXISTS association;
 DROP TABLE IF EXISTS "user";
 
+-- Création de la table des utilisateurs
 CREATE TABLE "user" (
   id          SERIAL PRIMARY KEY,
   lastname    VARCHAR(50) NOT NULL,
   firstname   VARCHAR(50) NOT NULL,
   email       VARCHAR(100) NOT NULL,
   password    VARCHAR(255) NOT NULL,
-  role        VARCHAR(20),
   created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  role        VARCHAR(50) CHECK (role IN ('family', 'association')) NOT NULL
 );
 
+-- Création de la table des familles
 CREATE TABLE family (
   id                 SERIAL PRIMARY KEY,
   address            VARCHAR(255) NOT NULL,
@@ -30,6 +34,7 @@ CREATE TABLE family (
   updated_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Création de la table des associations
 CREATE TABLE association (
   id                 SERIAL PRIMARY KEY,
   rna_number         VARCHAR(42) UNIQUE NOT NULL,
@@ -44,6 +49,7 @@ CREATE TABLE association (
   updated_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Création de la table des animaux
 CREATE TABLE animal (
   id               SERIAL PRIMARY KEY,
   name             VARCHAR(50) NOT NULL,
@@ -63,6 +69,7 @@ CREATE TABLE animal (
   updated_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Création de la table des demandes entre familles et animaux
 CREATE TABLE ask (
   id_family  INT REFERENCES family(id),
   id_animal  INT REFERENCES animal(id),
@@ -72,17 +79,16 @@ CREATE TABLE ask (
   PRIMARY KEY (id_family, id_animal)
 );
 
--- Fonction pour mettre à jour le timestamp
+-- Fonction pour mettre à jour le timestamp automatiquement lors des modifications
 CREATE OR REPLACE FUNCTION update_timestamp() 
 RETURNS TRIGGER AS $$ 
 BEGIN
     NEW.updated_at = CURRENT_TIMESTAMP;
     RETURN NEW;
 END; 
-$$
- LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql;
 
--- Triggers pour mettre à jour les timestamps
+-- Triggers pour mettre à jour les timestamps lors des modifications
 CREATE TRIGGER update_animal_timestamp
 BEFORE UPDATE ON animal
 FOR EACH ROW 

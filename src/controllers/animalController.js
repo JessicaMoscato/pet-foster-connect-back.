@@ -1,50 +1,73 @@
-import { Animal } from '../models/index.js';
-import HttpError from '../middlewares/httperror.js';
+import Animal from "../models/animal.js";
+import HttpError from "../middlewares/httperror.js";
 
 export const animalController = {
-    getAllAnimals: async (_, res) => {
-        const animals = await Animal.findAll();
-        res.json(animals);
-    },
+  //! Recuperer tous les animaux
+  getAllAnimals: async (_, res) => {
+    const animals = await Animal.findAll();
+    res.json(animals);
+  },
 
-    getAnimalById: async (req, res) => {
-        const animalId = req.params.id;
-        const animal = await Animal.findbyPk(animalId);
+  //! Recuperer un animal
+  getAnimalById: async (req, res) => {
+    const animalId = req.params.id;
+    const animal = await Animal.findByPk(animalId, {
+      include: [
+        { association: "family" }, // Relation avec la famille
+        { association: "association" }, // Relation avec l'association
+      ],
+    });
 
-        if(!animal){
-            throw new HttpError(404, "Animal non trouvé. Veuillez vérifier l'animal demandé")
-        }
+    if (!animal) {
+      throw new HttpError(
+        404,
+        "Animal non trouvé. Veuillez vérifier l'animal demandé"
+      );
+    }
 
-        res.json(animal);
-    },
+    res.status(200).json(animal);
+  },
+  //! Ajouter un animal
+createAnimal: async (req, res) => {
+  const newAnimal = await Animal.create(req.body); // Crée un nouvel animal avec les données fournies dans la requête
+  res.status(201).json(newAnimal); // Renvoie la réponse avec le nouvel animal créé
+},
 
-    createAnimal: async (req, res) => {
-        const newAnimal = await Animal.create(req.body);
-        res.status(201).json(newAnimal);
-    },
-    
-    patchAnimal: async (req, res) => {
-        const animalId = req.params.id;
-        const selectidAnimal = await Animal.findbyPk(animalId);
+  //! Modifier un animal
+  patchAnimal: async (req, res) => {
+    const animalId = req.params.id;
+    const selectidAnimal = await Animal.findByPk(animalId);
 
-        if(!selectidAnimal){
-            throw new HttpError(404, "Animal non trouvé. Veuillez vérifier l'animal demandé")
-        }
+    if (!selectidAnimal) {
+      throw new HttpError(
+        404,
+        "Animal non trouvé. Veuillez vérifier l'animal demandé"
+      );
+    }
+    // Normalisation des champs
+    if (req.body.name) {
+      req.body.name = req.body.name.trim(); // Retire les espaces
+    }
+    Object.assign(selectidAnimal, req.body); // Met à jour les propriétés de l'animal
 
-        Object.assign(animalController, req.body);
-        await selectidAnimal.save();
-        res.json(selectidAnimal);
-    },
+    await selectidAnimal.save(); // Sauvegarde l'animal mis à jour
 
-    deleteAnimal: async (req, res) => {
-        const animalId = req.params.id;
-        const selectidAnimal = await Animal.findbyPk(animalId);
+    res.status(200).json(selectidAnimal);
+  },
 
-        if(!selectidAnimal){
-            throw new HttpError(404, "Animal non trouvé. Veuillez vérifier l'animal demandé")
-        }
 
-        await selectidAnimal.destroy();
-        res.status(204).end();
-    },
+  //! Supprimer un animal
+  deleteAnimal: async (req, res) => {
+    const animalId = req.params.id;
+    const selectidAnimal = await Animal.findByPk(animalId);
+
+    if (!selectidAnimal) {
+      throw new HttpError(
+        404,
+        "Animal non trouvé. Veuillez vérifier l'animal demandé"
+      );
+    }
+    await selectidAnimal.destroy();
+    res.status(204).end();
+  },
 };

@@ -23,6 +23,9 @@ app.use(
   })
 );
 
+// Middleware pour traiter le JSON
+app.use(express.json());
+
 // Middleware pour servir des fichiers statiques (CSS, images, etc.)
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -32,7 +35,7 @@ app.use("/api", mainRouter);
 
 
 // Démarrage du serveur sur le port spécifié dans .env ou sur 3001 par défaut
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(
     `🚀 Serveur API démarré à l'adresse : http://localhost:${PORT}/api`
