@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "start" : "node index.js",
-    "dev": "DOTENV_CONFIG_PATH=.env nodemon index.js"
+    "dev": "DOTENV_CONFIG_PATH=.env nodemon index.js",
+    "postinstall": "pnpm install pg"
   },
   "keywords": [],
   "author": "Charlotte BEC, Cécile DUC DIT CATTY, Sujin KIM, Jessica MOSCATO, Mayya RENAULT",
