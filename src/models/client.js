@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
-
+import pg from "pg";
 
 dotenv.config();
 
@@ -24,6 +24,7 @@ const sequelize = new Sequelize(
       createdAt: "created_at",
       updatedAt: "updated_at",
     },
+    dialectModule: pg,
     dialectOptions: {
       ssl:
         env === "production" // Utilisation de 'env' pour vérifier l'environnement
