@@ -1,5 +1,6 @@
 import Animal from "../models/animal.js";
 import HttpError from "../middlewares/httperror.js";
+import { Op } from "sequelize";
 
 export const animalController = {
   //! Recuperer tous les animaux
@@ -27,6 +28,7 @@ export const animalController = {
 
     res.status(200).json(animal);
   },
+  
   //! Ajouter un animal
 createAnimal: async (req, res) => {
   const newAnimal = await Animal.create(req.body); // Crée un nouvel animal avec les données fournies dans la requête

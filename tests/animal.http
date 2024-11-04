@@ -6,7 +6,26 @@ Accept: application/json
 GET http://localhost:3000/api/animal/10
 Accept: application/json
 
+###
+GET http://localhost:3000/api/animal/1000
+Accept: application/json
+
 ### Requête POST pour créer un nouvel animal pour une association
+POST http://localhost:3000/api/animal
+Content-Type: application/json
+
+{ 
+  "name": "Janine",
+  "species": "Panthera leo",
+  "breed": "Berger Allemand",
+  "gender":"F",
+  "age": 5,
+  "size":"grand",
+  "id_association":1
+
+}
+
+### Requête POST pour créer un nouvel animal avec erreur sur le nom
 POST http://localhost:3000/api/animal
 Content-Type: application/json
 
@@ -16,6 +35,21 @@ Content-Type: application/json
   "breed": "Berger Allemand",
   "gender":"M",
   "age": 5,
+  "size":"grand",
+  "id_association":1
+
+}
+
+### Requête POST pour créer un nouvel animal avec erreur sur l'espéce
+POST http://localhost:3000/api/animal
+Content-Type: application/json
+
+{ 
+  "name": "janine",
+  "species": 56,
+  "breed": true,
+  "gender":"MFHG",
+  "age": "1 an",
   "size":"grand",
   "id_association":1
 
