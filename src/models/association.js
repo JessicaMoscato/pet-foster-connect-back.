@@ -3,42 +3,57 @@ import { Model, DataTypes } from "sequelize";
 
 export default class Association extends Model{}
 
-Association.init({
+Association.init(
+  {
     representative: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: {msg: "Le représentant est obligatoire"},
-        },
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: { msg: "Le représentant est obligatoire" },
+      },
     },
     address: {
-        type: DataTypes.STRING,
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: { msg: "L'adresse est obligatoire" },
+      },
+
+      postal_code: {
+        type: DataTypes.CHAR(5),
         allowNull: false,
         validate: {
-            notEmpty: {msg: "L'adresse est obligatoire"},
+          is: /^[0-9]{5}$/i, // Vérifie que le code postal est composé de 5 chiffres
         },
+        
+      },
+      city: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+      },
     },
     phone: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            is: /^[0-9]+$/i,  // Vérifie que le numéro ne contient que des chiffres
-            notEmpty: {msg: "Le numéro de téléphone est obligatoire"},
-        },
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        is: /^[0-9]+$/i, // Vérifie que le numéro ne contient que des chiffres
+        notEmpty: { msg: "Le numéro de téléphone est obligatoire" },
+      },
     },
     description: {
-        type: DataTypes.TEXT,
+      type: DataTypes.TEXT,
     },
     status: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        defaultValue: "en attente",
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "en attente",
     },
     profile_photo: {
-        type: DataTypes.STRING,
+      type: DataTypes.STRING,
     },
-},
-{
+  },
+  {
     sequelize: sequelize,
     tableName: "association",
-});
+  }
+);

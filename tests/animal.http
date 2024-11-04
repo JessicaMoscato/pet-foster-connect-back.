@@ -11,7 +11,7 @@ POST http://localhost:3000/api/animal
 Content-Type: application/json
 
 { 
-  "name": "test",
+  "name": 2,
   "species": "Panthera leo",
   "breed": "Berger Allemand",
   "gender":"M",
