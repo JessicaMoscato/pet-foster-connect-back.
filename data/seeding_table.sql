@@ -130,6 +130,7 @@ INSERT INTO animal (name, species, breed, gender, age, size, description, profil
 ('Tina', 'Chien', 'Catahoula Leopard Dog', 'F', 3, 'Moyen', 'Chienne énergique et indépendante', 'images/animals_profile/68.webp', 'images/animals_photo1/68.webp', 'images/animals_photo2/68.webp', 'images/animals_photo3/68.webp', 7),
 ('Oliver', 'Chat', 'Norwegian Forest Cat', 'M', 4, 'Grand', 'Chat doux et joueur', 'images/animals_profile/69.webp', 'images/animals_photo1/69.webp', 'images/animals_photo2/69.webp', 'images/animals_photo3/69.webp', 7),
 ('Sasha', 'Chat', 'Abyssinian', 'F', 2, 'Moyen', 'Chat curieux et énergique', 'images/animals_profile/70.webp', 'images/animals_photo1/70.webp', 'images/animals_photo2/70.webp', 'images/animals_photo3/70.webp', 7),
+
 ('Toby', 'Chat', 'Himalayan', 'M', 5, 'Grand', 'Chat calme et doux', 'images/animals_profile/71.webp', 'images/animals_photo1/71.webp', 'images/animals_photo2/71.webp', 'images/animals_photo3/71.webp', 7),
 ('Misty', 'Chat', 'Oriental Shorthair', 'F', 3, 'Moyen', 'Chat sociable et affectueux', 'images/animals_profile/72.webp', 'images/animals_photo1/72.webp', 'images/animals_photo2/72.webp', 'images/animals_photo3/72.webp', 7),
 ('Rusty', 'Chat', 'Egyptian Mau', 'M', 5, 'Moyen', 'Chat énergique et curieux', 'images/animals_profile/85.webp', 'images/animals_photo1/85.webp', 'images/animals_photo2/85.webp', 'images/animals_photo3/85.webp', 9),
