@@ -26,35 +26,36 @@ INSERT INTO "user" (lastname, firstname, email, password, role) VALUES
 ('David', 'Alice', 'alice.david@email.com', 'hashedpassword24', 'family');
 
 -- Insertion dans la table "family"
-INSERT INTO family (address, phone, number_of_children, number_of_animals, garden, description, profile_photo, id_user) VALUES
-('123 Rue de la Paix, Paris', '0123456789', 2, 1, true, 'Famille Dupont avec un grand jardin.', 'images/users/Dupontjean-fa.webp', 1),
-('456 Avenue des Champs-Élysées, Paris', '0987654321', 1, 0, false, 'Famille Martin vivant dans un petit appartement.', 'images/users/Martinsophie-fa.webp', 2),
-('789 Boulevard Haussmann, Paris', '0123987456', 3, 2, true, 'Famille Durand avec une grande maison.', 'images/users/Durandhugo-fa.webp', 3),
-('321 Rue de la Liberté, Lyon', '0147253689', 2, 1, true, 'Famille Leroy aimant les chiens.', 'images/users/Leroylea-fa.webp', 4),
-('654 Avenue des Fleurs, Marseille', '0198765432', 1, 3, true, 'Famille Moreau avec plusieurs animaux.', 'images/users/Moreauluc-fa.webp', 5),
-('12 Rue des Oliviers, Nice', '0678901234', 2, 2, false, 'Famille Giraud dans un appartement spacieux.', 'images/users/Giraudantoine-fa.webp', 11),
-('14 Avenue des Arbres, Bordeaux', '0612345678', 3, 1, true, 'Famille Henry aimant la nature.', 'images/users/Henrycamille-fa.webp', 12),
-('78 Rue du Soleil, Toulouse', '0556123456', 2, 0, true, 'Famille Simon proche de la campagne.', 'images/users/Simonnicolas-fa.webp', 13),
-('90 Avenue des Étoiles, Marseille', '0543210987', 4, 1, false, 'Famille Roussel avec plusieurs enfants.', 'images/users/Rousseljulie-fa.webp', 14),
-('23 Rue de la Mer, Lille', '0634567890', 1, 0, true, 'Famille Bourgeois vivant en bord de mer.', 'images/users/Bourgeoisphilippe-fa.webp', 15),
-('45 Avenue du Lac, Montpellier', '0645123456', 3, 2, false, 'Famille Vasseur avec des enfants et des animaux.', 'images/users/Vasseurjulien-fa.webp', 17),
-('67 Boulevard des Jardins, Paris', '0621345678', 2, 1, true, 'Famille Meyer passionnée de jardinage.', 'images/users/Meyerclara-fa.webp', 18),
-('89 Rue des Champs, Lyon', '0656789123', 2, 0, true, 'Famille Aubert avec un grand jardin.', 'images/users/Aubertcecile-fa.webp', 20),
-('101 Avenue de la Liberté, Nantes', '0678901235', 3, 2, false, 'Famille Morel avec des animaux exotiques.', 'images/users/Morellouis-fa.webp', 22),
-('23 Rue des Belles Vues, Grenoble', '0689123456', 0, 0, true, 'Famille David accueillant des voyageurs.', 'images/users/Davidalice-fa.webp', 24);
+INSERT INTO family (address, postal_code, city, phone, number_of_children, number_of_animals, garden, description, profile_photo, id_user) VALUES
+('123 Rue de la Paix', '75002', 'Paris', '0123456789', 2, 1, true, 'Famille Dupont avec un grand jardin.', 'images/users/Dupontjean-fa.webp', 1),
+('456 Avenue des Champs-Élysées', '75008', 'Paris', '0987654321', 1, 0, false, 'Famille Martin vivant dans un petit appartement.', 'images/users/Martinsophie-fa.webp', 2),
+('789 Boulevard Haussmann', '75008', 'Paris', '0123987456', 3, 2, true, 'Famille Durand avec une grande maison.', 'images/users/Durandhugo-fa.webp', 3),
+('321 Rue de la Liberté', '69003', 'Lyon', '0147253689', 2, 1, true, 'Famille Leroy aimant les chiens.', 'images/users/Leroylea-fa.webp', 4),
+('654 Avenue des Fleurs', '13001', 'Marseille', '0198765432', 1, 3, true, 'Famille Moreau avec plusieurs animaux.', 'images/users/Moreauluc-fa.webp', 5),
+('12 Rue des Oliviers', '06000', 'Nice', '0678901234', 2, 2, false, 'Famille Giraud dans un appartement spacieux.', 'images/users/Giraudantoine-fa.webp', 11),
+('14 Avenue des Arbres', '33000', 'Bordeaux', '0612345678', 3, 1, true, 'Famille Henry aimant la nature.', 'images/users/Henrycamille-fa.webp', 12),
+('78 Rue du Soleil', '31000', 'Toulouse', '0556123456', 2, 0, true, 'Famille Simon proche de la campagne.', 'images/users/Simonnicolas-fa.webp', 13),
+('90 Avenue des Étoiles', '13001', 'Marseille', '0543210987', 4, 1, false, 'Famille Roussel avec plusieurs enfants.', 'images/users/Rousseljulie-fa.webp', 14),
+('23 Rue de la Mer', '59000', 'Lille', '0634567890', 1, 0, true, 'Famille Bourgeois vivant en bord de mer.', 'images/users/Bourgeoisphilippe-fa.webp', 15),
+('45 Avenue du Lac', '34000', 'Montpellier', '0645123456', 3, 2, false, 'Famille Vasseur avec des enfants et des animaux.', 'images/users/Vasseurjulien-fa.webp', 17),
+('67 Boulevard des Jardins', '75014', 'Paris', '0621345678', 2, 1, true, 'Famille Meyer passionnée de jardinage.', 'images/users/Meyerclara-fa.webp', 18),
+('89 Rue des Champs', '69006', 'Lyon', '0656789123', 2, 0, true, 'Famille Aubert avec un grand jardin.', 'images/users/Aubertcecile-fa.webp', 20),
+('101 Avenue de la Liberté', '44000', 'Nantes', '0678901235', 3, 2, false, 'Famille Morel avec des animaux exotiques.', 'images/users/Morellouis-fa.webp', 22),
+('23 Rue des Belles Vues', '38000', 'Grenoble', '0689123456', 0, 0, true, 'Famille David accueillant des voyageurs.', 'images/users/Davidalice-fa.webp', 24);
+
 
 -- Insertion dans la table "association"
-INSERT INTO association (rna_number, representative, address, phone, description, status, profile_photo, id_user) VALUES
-('W123456789', 'Pierre Dubois', '10 Rue des Associations, Lyon', '0654321987', 'Association de protection des chiens et chats', 'actif', 'images/users/Duboispierre-asso.webp', 6),
-('W987654321', 'Marie Lefebvre', '20 Avenue des Bénévoles, Marseille', '0798765432', 'Refuge pour chiens et chats en détresse', 'actif', 'images/users/Lefebvremarie-asso.webp', 7),
-('W234567890', 'Alice Bernard', '30 Rue du Secours, Toulouse', '0612345678', 'Refuge pour animaux abandonnés et maltraités', 'actif', 'images/users/Bernardalice-asso.webp', 8),
-('W345678901', 'Paul Thomas', '40 Avenue des Animaux, Nantes', '0723456789', 'Association de défense des droits des chiens et chats', 'actif', 'images/users/Thomaspaul-asso.webp', 9),
-('W456789012', 'Emma Robert', '50 Boulevard des Oiseaux, Strasbourg', '0834567890', 'Refuge pour animaux domestiques blessés', 'actif', 'images/users/Robertemma-asso.webp', 10),
-('W567890123', 'Lucie Morin', '60 Rue des Chevaux, Lille', '0945678901', 'Sauvetage des chiens et chats en détresse', 'actif', 'images/users/Morinlucie-asso.webp', 16),
-('W678901234', 'Maxime Collet', '70 Avenue des Rongeurs, Bordeaux', '0756789012', 'Refuge pour petits chiens et chats maltraités', 'actif', 'images/users/Colletmaxime-asso.webp', 19),
-('W789012345', 'Louis Pichon', '80 Rue de la Protection, Nice', '0867890123', 'Protection des animaux domestiques', 'actif', 'images/users/Pichonlouis-asso.webp', 21),
-('W890123456', 'Raphaël Garnier', '90 Boulevard des Exotiques, Rennes', '0978901234', 'Refuge pour animaux en danger', 'actif', 'images/users/Garnierraphael-asso.webp', 23),
-('W901234567', 'Cécile Aubert', '100 Avenue de la Faune, Montpellier', '0856789012', 'Sauvegarde des animaux domestiques', 'actif', 'images/users/Aubertcecile-asso.webp', 20);
+INSERT INTO association (rna_number, representative, address, postal_code, city, phone, description, status, profile_photo, id_user) VALUES
+('W123456789', 'Pierre Dubois', '10 Rue des Associations', '69000', 'Lyon', '0654321987', 'Association de protection des chiens et chats', 'actif', 'images/users/Duboispierre-asso.webp', 6),
+('W987654321', 'Marie Lefebvre', '20 Avenue des Bénévoles', '13000', 'Marseille', '0798765432', 'Refuge pour chiens et chats en détresse', 'actif', 'images/users/Lefebvremarie-asso.webp', 7),
+('W234567890', 'Alice Bernard', '30 Rue du Secours', '31000', 'Toulouse', '0612345678', 'Refuge pour animaux abandonnés et maltraités', 'actif', 'images/users/Bernardalice-asso.webp', 8),
+('W345678901', 'Paul Thomas', '40 Avenue des Animaux', '44000', 'Nantes', '0723456789', 'Association de défense des droits des chiens et chats', 'actif', 'images/users/Thomaspaul-asso.webp', 9),
+('W456789012', 'Emma Robert', '50 Boulevard des Oiseaux', '67000', 'Strasbourg', '0834567890', 'Refuge pour animaux domestiques blessés', 'actif', 'images/users/Robertemma-asso.webp', 10),
+('W567890123', 'Lucie Morin', '60 Rue des Chevaux', '59000', 'Lille', '0945678901', 'Sauvetage des chiens et chats en détresse', 'actif', 'images/users/Morinlucie-asso.webp', 16),
+('W678901234', 'Maxime Collet', '70 Avenue des Rongeurs', '33000', 'Bordeaux', '0756789012', 'Refuge pour petits chiens et chats maltraités', 'actif', 'images/users/Colletmaxime-asso.webp', 19),
+('W789012345', 'Louis Pichon', '80 Rue de la Protection', '06000', 'Nice', '0867890123', 'Protection des animaux domestiques', 'actif', 'images/users/Pichonlouis-asso.webp', 21),
+('W890123456', 'Raphaël Garnier', '90 Boulevard des Exotiques', '35000', 'Rennes', '0978901234', 'Refuge pour animaux en danger', 'actif', 'images/users/Garnierraphael-asso.webp', 23),
+('W901234567', 'Cécile Aubert', '100 Avenue de la Faune', '34000', 'Montpellier', '0856789012', 'Sauvegarde des animaux domestiques', 'actif', 'images/users/Aubertcecile-asso.webp', 20);
 
 
 -- Insertion dans la table animal

@@ -23,6 +23,8 @@ CREATE TABLE "user" (
 CREATE TABLE family (
   id                 SERIAL PRIMARY KEY,
   address            VARCHAR(255) NOT NULL,
+  postal_code        CHAR(5) NOT NULL, 
+  city               VARCHAR(50) NOT NULL, 
   phone              VARCHAR(15) NOT NULL,
   number_of_children INT,
   number_of_animals  INT,
@@ -34,12 +36,15 @@ CREATE TABLE family (
   updated_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
 -- Création de la table des associations
 CREATE TABLE association (
   id                 SERIAL PRIMARY KEY,
   rna_number         VARCHAR(42) UNIQUE NOT NULL,
   representative     VARCHAR(100) NOT NULL,
   address            VARCHAR(255) NOT NULL,
+  postal_code        CHAR(5) NOT NULL, 
+  city               VARCHAR(50) NOT NULL, 
   phone              VARCHAR(15) NOT NULL,
   description        TEXT,
   status             VARCHAR(15) NOT NULL,

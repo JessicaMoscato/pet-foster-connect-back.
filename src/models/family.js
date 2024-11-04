@@ -1,7 +1,6 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from "./client.js";
 
-
 export default class Family extends Model {}
 
 Family.init(
@@ -12,10 +11,23 @@ Family.init(
       primaryKey: true,
       autoIncrement: true,
     }, */
+
     address: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    postal_code: {
+      type: DataTypes.CHAR(5),
+      allowNull: false,
+      validate: {
+        is: /^[0-9]{5}$/i, // Vérifie que le code postal est composé de 5 chiffres
+      },
+    },
+    city: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+
     phone: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -60,4 +72,3 @@ Family.init(
     tableName: "family",
   }
 );
-
