@@ -4,8 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "DOTENV_CONFIG_PATH=.env nodemon index.js"
+    "start" : "node index.js",
+    "dev": "DOTENV_CONFIG_PATH=.env nodemon index.js",
+    "postinstall": "pnpm install pg"
   },
   "keywords": [],
   "author": "Charlotte BEC, Cécile DUC DIT CATTY, Sujin KIM, Jessica MOSCATO, Mayya RENAULT",

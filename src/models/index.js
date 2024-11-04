@@ -1,66 +1,75 @@
-import client from "./sequelize.js";
-import User from "./models/U.js";
-import Family from "./models/family.js";
-import Association from "./models/association.js";
-import Animal from "./models/animal.js";
-import Ask from "./models/ask.js";
+import client from "./client.js";
+import User from "./user.js";
+import Family from "./family.js";
+import Association from "./association.js";
+import Animal from "./animal.js";
+import Ask from "./ask.js";
 
-
-//! Une famille peut avoir plusieurs animaux 
+//! Une famille peut avoir plusieurs animaux
 Family.hasMany(Animal, {
   foreignKey: "id_family", // clé étrangère dans animal
-  as: "animals",
+  as: "animalsFamily", // alias pour la relation
 });
 
 Animal.belongsTo(Family, {
   foreignKey: "id_family", // clé étrangère dans animal
-  as: "family",
+  as: "family", // alias pour la relation
 });
 
-//! Une association peut avoir plusieurs animaux 
+//! Une association peut avoir plusieurs animaux
 Association.hasMany(Animal, {
   foreignKey: "id_association", // clé étrangère dans animal
-  onDelete: "cascade",
-  as: "animals",
+  onDelete: "cascade", // suppression en cascade
+  as: "animals", // alias pour la relation
 });
 
 Animal.belongsTo(Association, {
   foreignKey: "id_association", // clé étrangère dans animal
-  as: "association",
+  as: "association", // alias pour la relation
 });
 
 //! Un utilisateur peut être associé à une famille
 User.hasOne(Family, {
   foreignKey: "id_user", // clé étrangère dans family
-  as: "family",
+  as: "family", // alias pour la relation
 });
+
 Family.belongsTo(User, {
   foreignKey: "id_user", // clé étrangère dans family
-  as: "user",
+  as: "user", // alias pour la relation
 });
 
 //! Un utilisateur peut être associé à une association
 User.hasOne(Association, {
   foreignKey: "id_user", // clé étrangère dans association
-  as: "association",
+  as: "association", // alias pour la relation
 });
+
 Association.belongsTo(User, {
   foreignKey: "id_user", // clé étrangère dans association
-  as: "user",
+  as: "user", // alias pour la relation
 });
 
-//! Une famille peut faire plusieurs demandes (ask) 
-Family.belongsToMany(Animal, {
-  through: "ask",
-  foreignKey: "id_family",
-  as: "animals",
-});
-Animal.belongsToMany(Family, {
-  foreignKey: "id_animal", 
-  through: "ask",
-  as: "families",
+//! Une famille peut faire plusieurs demandes (ask)
+Family.hasMany(Ask, {
+  foreignKey: "id_family", // clé étrangère dans Ask
+  as: "asks", // alias pour la relation
 });
 
+Ask.belongsTo(Family, {
+  foreignKey: "id_family", // clé étrangère dans Ask
+  as: "family", // alias pour la relation
+});
 
+//! Un animal peut être associé à plusieurs demandes (ask)
+Animal.hasMany(Ask, {
+  foreignKey: "id_animal", // clé étrangère dans Ask
+  as: "asks", // alias pour la relation
+});
+
+Ask.belongsTo(Animal, {
+  foreignKey: "id_animal", // clé étrangère dans Ask
+  as: "animal", // alias pour la relation
+});
 
 export { client, User, Family, Association, Animal, Ask };

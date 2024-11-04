@@ -1,34 +1,30 @@
-import { Family } from "../models/family.js";
-import { HttpError } from "../middlewares/httperror.js";
+import  Family  from "../models/family.js";
+import HttpError from "../middlewares/httperror.js";
 
-export const associationController = {
+export const familyController = {
   //! Méthode pour lister les familles d'accueil
-  getAllFamilies: async (req, res) => { 
+  getAllFamilies: async (req, res) => {
     const families = await Family.findAll({
-      include : [
-        animals,// Inclut les animaux associés à chaque famille
-        user, // Inclut l'utilisateur associé à la famille d'accueil
-      ]
-   /*    include: [
-        { association: "animals", include: "association" }, // Inclut les animaux associés et leur association
-        { association: "user" }, // Inclut l'utilisateur associé à la famille d'accueil
-      ], */
+      include: [
+        { association: "animalsFamily" }, // Inclut les animaux associés à chaque famille
+        { association: "user" }, // Inclut les utilisateurs associés à chaque famille
+      ],
     });
-    res.json(families); // Envoie la liste des familles d'accueil avec leurs animaux en réponse sous forme de JSON
+    res.status(200).json(families); 
   },
 
   //! Méthode pour obtenir le détail d'une famille d'accueil
-  getFamilyById: async (req, next) => {
+  getFamilyById: async (req, res) => {
+    // Ajout de 'res' comme argument
     const { id: familyId } = req.params; // Extrait l'ID de la famille depuis les paramètres de la requête
     const family = await Family.findByPk(familyId, {
-      include: [
-        { association: "animals", include: "association" }, // Inclut les animaux associés et leur association
-        { association: "user" }, // Inclut l'utilisateur associé à la famille d'accueil
-      ],
+      include: [{ association: "animalsFamily" }, 
+                { association: "user" }],
     });
+
     if (!family) {
-      return next(new HttpError(404, "Foster family not found")); // Si aucune famille n'est trouvée, lance une erreur 404
+      return next(new HttpError(404, "Foster family not found")); 
     }
-    res.json(family); // Envoie la famille trouvée avec ses animaux en réponse sous forme de JSON
+    res.status(200).json(family); 
   },
 };

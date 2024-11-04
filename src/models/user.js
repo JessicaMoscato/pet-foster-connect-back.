@@ -1,7 +1,7 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from './client.js';
 
-export class User extends Model{}
+export default class User extends Model {}
 
 User.init({
     firstname: {
@@ -11,7 +11,7 @@ User.init({
             notEmpty: {msg: "Le Nom est obligatoire"},
         },
     },
-    lasstname: {
+    lastname: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
