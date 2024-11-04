@@ -3,7 +3,7 @@ GET http://localhost:3000/api/animal
 Accept: application/json
 
 ### Requête GET pour récupérer un animal par son ID
-GET http://localhost:3000/api/animal/10
+GET http://localhost:3000/api/animal/85
 Accept: application/json
 
 ###
@@ -40,7 +40,7 @@ Content-Type: application/json
 
 }
 
-### Requête POST pour créer un nouvel animal avec erreur sur l'espéce
+### Requête POST pour créer un nouvel animal avec erreur
 POST http://localhost:3000/api/animal
 Content-Type: application/json
 
@@ -50,8 +50,8 @@ Content-Type: application/json
   "breed": true,
   "gender":"MFHG",
   "age": "1 an",
-  "size":"grand",
-  "id_association":1
+  "size":"grand", // a supprimer
+  "id_association":765
 
 }
 
@@ -62,6 +62,30 @@ Content-Type: application/json
 {
   "name": "Lion modifié",
   "age": 6
+}
+
+### Requête PATCH pour modifier un animal par son ID
+PATCH http://localhost:3000/api/animal/85
+Content-Type: application/json
+
+{
+  "species": "Chat Chien",
+  "breed": "expérience raté",
+  "gender": "M",
+  "size": "petit"
+}
+
+### Requête PATCH pour modifier un animal par son ID avec erreur
+PATCH http://localhost:3000/api/animal/85
+Content-Type: application/json
+
+{
+  "name": "Lion modifié",
+  "species": "Chat Chien",
+  "breed": "expérience raté",
+  "gender": "Mhg",
+  "age": true,
+  "size": "petit",
 }
 
 ### Requête DELETE pour supprimer un animal par son ID
