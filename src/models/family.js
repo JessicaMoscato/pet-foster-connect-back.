@@ -37,11 +37,11 @@ Family.init(
     },
     number_of_children: {
       type: DataTypes.INTEGER,
-      defaultValue: 0,
+      allowNull: false,
     },
     number_of_animals: {
       type: DataTypes.INTEGER,
-      defaultValue: 0,
+      allowNull: false,
     },
     garden: {
       type: DataTypes.BOOLEAN,
