@@ -22,7 +22,7 @@ export const familyController = {
                 { association: "user" }],
     });
 
-    if (family === null) {
+    if (!family) {
       return next(new HttpError(404, "Foster family not found")); 
     }
     res.status(200).json(family); 
