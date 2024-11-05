@@ -1,4 +1,4 @@
-import { User} from "../models/index.js";
+import { User, Family, Association} from "../models/index.js";
 import sequelize from "../models/client.js";
 import HttpError from "../middlewares/httperror.js";
 
@@ -14,35 +14,67 @@ export const userController = {
   //! créer un nouvel utilisateur
   createUser: async (req, res) => {
     const userData = req.body;
+    const familyData = req.body.family;
+    const associationData = req.body.association;
+    
+    if (familyData) {
+      userData.role = "family";
 
-    if (
-      !userData.role ||
-      (userData.role !== "family" && userData.role !== "association") // Vérifie si le rôle est spécifié
-    ) {
-      throw new HttpError(
-        400,
-        'Le rôle doit être soit "family" soit "association".'
-      );
+      const newUser = await User.create({
+        firstname: userData.firstname,
+        lastname: userData.lastname,
+        email: userData.email,
+        password: userData.password,
+        role: userData.role
+      })
+
+      const newFamily = await Family.create({
+        ...familyData,
+        id_user: newUser.id
+      });
+      
+      const userFamily = {
+        ...newUser.toJSON(),
+        family: newFamily.toJSON()
+      }
+
+      res.status(201).json(userFamily)
+    }
+    
+    if (associationData) {
+      userData.role = "association";
+
+      const newUser = await User.create({
+        firstname: userData.firstname,
+        lastname: userData.lastname,
+        email: userData.email,
+        password: userData.password,
+        role: userData.role
+      })
+
+      const newAssociation= await Association.create({
+        ...associationData,
+        id_user: newUser.id
+      });
+      
+      const userAssociation = {
+        ...newUser.toJSON(),
+        association: newAssociation.toJSON()
+      }
+
+      res.status(201).json(userAssociation)
     }
 
-    // Créer l'utilisateur sans inclure les relations pour l'instant
-    const newUser = await User.create(userData);
-
-    // Si nécessaire, vous pouvez ici établir des relations avec des associations ou familles
-    // Exemple :
-    // if (userData.associationId) {
-    //     await newUser.setAssociation(userData.associationId);
-    // }
-    // else if (userData.familyId) {
-    //     await newUser.setFamily(userData.familyId);
-    // }
-
-    res.status(201).json(newUser);
+    else {
+      throw new HttpError(400, "Merci de bien compléter toutes les informations")
+    }
   },
 
   //! Modifier un utilisateur
   patchUser: async (req, res) => {
     const userId = req.params.id;
+    const updateUser = req.body;
+
     const user = await User.findByPk(userId, {
       include: ["association", "family"], 
     });
@@ -53,20 +85,38 @@ export const userController = {
     }
 
     // Normalisation des champs 
-    if (req.body.firstname) {
-      req.body.firstname = req.body.firstname.trim(); // Retire les espaces
+    if (updateUser.firstname) {
+      updateUser.firstname = updateUser.firstname.trim(); // Retire les espaces
     }
-    if (req.body.lastname) {
-      req.body.lastname = req.body.lastname.trim(); // Retire les espaces
+    if (updateUser.lastname) {
+      updateUser.lastname = updateUser.lastname.trim(); // Retire les espaces
     }
 
+    await user.update(updateUser);
+
+    if (updateUser.family) {
+      const userFamily = await Family.findOne({
+        where: {id_user: userId}
+      });
+      await userFamily.update(updateUser.family)
+    }
+    if (updateUser.association) {
+      const userAssociation =await Association.findOne({
+        where: {id_user: userId}
+      });
+      await userAssociation.update(updateUser.association)
+    }
+
+    const newUser = await User.findByPk(userId, {
+      include: ["association", "family"]
+    })
     // Met à jour les propriétés de l'utilisateur
-    Object.assign(user, req.body);
+    // Object.assign(user, req.body);
 
     // Sauvegarde l'utilisateur mis à jour
-    await user.save();
+    // await user.save();
 
-    res.status(200).json(user);
+    res.status(200).json(newUser);
   },
 
   //! Supprimer un utilisateur

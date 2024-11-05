@@ -3,17 +3,93 @@
 GET http://localhost:3000/api/user
 Content-Type: application/json
 
-
-### Créer un nouvel utilisateur
+### Créer un nouvel utilisateur sans info family ou association
 POST http://localhost:3000/api/user
 Content-Type: application/json
 
 {
   "firstname": "Jess",
   "lastname": "M",
-  "password": "motdepasse123",
   "email": "utilisateur@example.com",
-  "role": "family"
+  "password": "motdepasse123"
+}
+
+### Créer un nouvel utilisateur famille
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+  "firstname": "Charles",
+  "lastname": "CB",
+  "email": "utilisateur@example.com",
+  "password": "motdepasse123",
+  "family": {
+    "address": "rue de la pierre frite",
+    "postal_code": "60240",
+    "city": "Paris",
+    "phone": "0123456789",
+    "number_of_children": 30,
+    "number_of_animals": 0,
+    "garden": true
+  }
+}
+
+### Créer un nouvel utilisateur famille avec erreur
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+  "firstname": "Charles",
+  "lastname": 54,
+  "email": "utilisateur@example.com",
+  "password": "motdepasse123",
+  "family": {
+    "address": "rue de la pierre frite",
+    "postal_code": "60240",
+    "city": "Paris",
+    "phone": "0123456789",
+    "number_of_children": "albert",
+    "number_of_animals": 0,
+    "garden": true
+  }
+}
+
+### Créer un nouvel utilisateur association
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+  "firstname": "Jess",
+  "lastname": "M",
+  "email": "utilisateur@example.com",
+  "password": "motdepasse123",
+  "association": {
+    "rna_number": "W123456791",
+    "representative": "Charles CB",
+    "address": "rue de la pierre frite",
+    "postal_code": "60240",
+    "city": "Paris",
+    "phone": "0123456789"
+  }
+}
+
+### Créer un nouvel utilisateur association avec erreur
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+  "firstname": "Jess",
+  "lastname": true,
+  "email": "utilisateur@example.com",
+  "password": "motdepasse123",
+  "association": {
+    "rna_number": "W123456791",
+    "representative": 98,
+    "address": "rue de la pierre frite",
+    "postal_code": "60240",
+    "city": "Paris",
+    "phone": "0123456789"
+  }
 }
 
 ### Modifier un utilisateur
@@ -21,14 +97,36 @@ PATCH http://localhost:3000/api/user/1
 Content-Type: application/json
 
 {
-  "firstname": "Jean",
-  "lastname": "Dupond",
-  "email": "jean.dupont@email.com",
+  "firstname": "Jeanne",
+  "email": "jeandupont@email.com",
   "password": "hashedpassword11"
  
 }
 
+### Modifier une family
+PATCH http://localhost:3000/api/user/1
+Content-Type: application/json
+
+{
+  "firstname": "Jean",
+  "email": "jeandupont@email.com",
+  "password": "hashedpassword11",
+  "family": {
+    "address": "rue des Quesadillas en folie"
+  }
+}
+
+### Modifier un utilisateur avec erreur
+PATCH http://localhost:3000/api/user/1
+Content-Type: application/json
+
+{
+  "firstname": 87,
+  "email": "jeandupont@email.com",
+  "password": "hashedpassword11"
+ 
+}
 
 ### effacer un utilisateur
-DELETE http://localhost:3000/api/user/27
+DELETE http://localhost:3000/api/user/1
 Accept: application/json

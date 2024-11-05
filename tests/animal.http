@@ -50,9 +50,8 @@ Content-Type: application/json
   "breed": true,
   "gender":"MFHG",
   "age": "1 an",
-  "size":"grand", // a supprimer
+  "size":"grand",
   "id_association":765
-
 }
 
 ### Requête PATCH pour modifier un animal par son ID
