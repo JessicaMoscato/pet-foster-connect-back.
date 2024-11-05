@@ -16,4 +16,3 @@ router.patch("/:id", validate(patchSchema, 'body'), withTryCatch(animalControlle
 router.delete("/:id", withTryCatch(animalController.deleteAnimal)); // Route pour supprimer un animal par son ID
 
 
-

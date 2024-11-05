@@ -5,11 +5,6 @@ export default class Animal extends Model{}
 
 Animal.init(
   {
-  /*     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    }, */
     name: {
       type: DataTypes.STRING,
       allowNull: false,
