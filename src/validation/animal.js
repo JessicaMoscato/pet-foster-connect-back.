@@ -15,3 +15,19 @@ export const createSchema = Joi.object({
     id_family: Joi.number().integer(),
     id_association: Joi.number().integer().required()
 });
+
+export const patchSchema = Joi.object({
+    name: Joi.string(),
+    species: Joi.string(),
+    breed: Joi.string(),
+    gender: Joi.string().valid('M', 'F'),
+    age: Joi.number().integer(),
+    size: Joi.string(),
+    description: Joi.string(),
+    profile_photo: Joi.string(),
+    photo1: Joi.string(),
+    photo2: Joi.string(),
+    photo3: Joi.string(),
+    id_family: Joi.number().integer(),
+    id_association: Joi.number().integer()
+}).min(1);
