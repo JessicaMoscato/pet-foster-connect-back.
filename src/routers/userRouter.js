@@ -3,6 +3,8 @@
 import { Router } from "express";
 import withTryCatch from "../controllers/withTryCatchController.js";
 import { userController } from "../controllers/userController.js"; 
+import { validate } from "../validation/validate.js";
+import { createSchema, patchSchema } from "../validation/allUser.js";
 
 export const router = Router();
 

@@ -28,7 +28,7 @@ CREATE TABLE family (
   phone              VARCHAR(15) NOT NULL,
   number_of_children INT,
   number_of_animals  INT,
-  garden             BOOLEAN NOT NULL,
+  garden             BOOLEAN,
   description        TEXT,
   profile_photo      VARCHAR(255),
   id_user            INT NOT NULL UNIQUE REFERENCES "user"(id),

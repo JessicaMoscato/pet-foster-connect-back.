@@ -14,7 +14,7 @@ export const familyController = {
   },
 
   //! Méthode pour obtenir le détail d'une famille d'accueil
-  getFamilyById: async (req, res) => {
+  getFamilyById: async (req, res, next) => {
     // Ajout de 'res' comme argument
     const { id: familyId } = req.params; // Extrait l'ID de la famille depuis les paramètres de la requête
     const family = await Family.findByPk(familyId, {

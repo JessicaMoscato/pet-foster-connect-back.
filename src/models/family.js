@@ -27,7 +27,6 @@ Family.init(
       type: DataTypes.STRING(50),
       allowNull: false,
     },
-
     phone: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -37,11 +36,11 @@ Family.init(
     },
     number_of_children: {
       type: DataTypes.INTEGER,
-      defaultValue: 0,
+      allowNull: false,
     },
     number_of_animals: {
       type: DataTypes.INTEGER,
-      defaultValue: 0,
+      allowNull: false,
     },
     garden: {
       type: DataTypes.BOOLEAN,
@@ -52,20 +51,20 @@ Family.init(
     },
     profile_photo: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
+      // allowNull: false,
+      // unique: true,
     },
-    id_user: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      unique: true,
+    //id_user: {
+    //  type: DataTypes.INTEGER,
+    //  allowNull: false,
+    //  unique: true,
 
       //* pas indispensable
       /* references: {
         model: "user", 
         key: "id", 
       }, */
-    },
+    //},
   },
   {
     sequelize: sequelize,
