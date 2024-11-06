@@ -1,7 +1,7 @@
 import User from "../models/user.js";
 import { Scrypt } from "../auth/Scrypt.js";
 import { generateToken } from "../auth/tokenService.js";
-import validator from "validator"; // Utilisation du validateur
+import validator from "validator";
 
 //! Fonction de validation de mot de passe
 const validatePassword = (password) => {
@@ -17,6 +17,11 @@ export const signinController = {
   //! Méthode pour connecter un utilisateur
   async signinUser(req, res) {
     const { email, password } = req.body;
+
+    // Vérification de la validité de l'email
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({ message: "Email invalide" });
+    }
 
     // Vérification de la validité du mot de passe
     if (!validatePassword(password)) {
@@ -44,4 +49,6 @@ export const signinController = {
       user: { email: user.email, role: user.role },
     });
   },
+
+
 };

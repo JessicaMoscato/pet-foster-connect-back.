@@ -1,0 +1,49 @@
+### Requête pour tester l'inscription (signup) pour un utilisateur de type "family"
+POST http://localhost:3000/api/signup 
+Content-Type: application/json
+
+{
+  "firstname": "test",
+  "lastname": "UserFamily",
+  "address": "123 Main St",
+  "postal_code": "12345",
+  "city": "Paris",
+  "phone": "0123456789",
+  "email": "family1@example.com",
+  "password": "Family@123",
+  "role": "family"
+}
+
+### Requête pour tester l'inscription (signup) pour un utilisateur de type "association"
+POST http://localhost:3000/api/signup 
+Content-Type: application/json
+
+{
+  "firstname": "Asso",
+  "lastname": "UserAsso",
+  "address": "456 Park Ave",
+  "postal_code": "67890",
+  "city": "Paris",
+  "phone": "0987654321",
+  "email": "asso1@example.com",
+  "password": "Asso@123",
+  "role": "association",
+  "rna_number": "123456789",
+  "representative": "John Doe"
+}
+
+### Requête pour tester l'inscription (signup) pour un utilisateur de type "admin"
+POST http://localhost:3000/api/signup 
+Content-Type: application/json
+
+{
+  "firstname": "Admin",
+  "lastname": "UserAdmin",
+  "address": "789 Admin St",
+  "postal_code": "54321",
+  "city": "Paris",
+  "phone": "0112233445",
+  "email": "admin1@example.com",
+  "password": "Admin@123",
+  "role": "admin"
+}

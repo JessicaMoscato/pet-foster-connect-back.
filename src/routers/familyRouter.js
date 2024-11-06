@@ -6,6 +6,6 @@ import { familyController } from "../controllers/familyController.js";
 
 export const router = Router();
 
-
+//association admin
 router.get("/", withTryCatch(familyController.getAllFamilies)); // Route pour lister toutes les familles
 router.get("/:id", withTryCatch(familyController.getFamilyById)); // Route pour obtenir le détail d'une famille

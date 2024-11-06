@@ -3,6 +3,10 @@
 GET http://localhost:3000/api/user
 Content-Type: application/json
 
+### effacer un utilisateur
+DELETE http://localhost:3000/api/user/32
+Accept: application/json
+
 
 ### Créer un nouvel utilisateur
 POST http://localhost:3000/api/user
@@ -30,5 +34,5 @@ Content-Type: application/json
 
 
 ### effacer un utilisateur
-DELETE http://localhost:3000/api/user/26
+DELETE http://localhost:3000/api/user/34
 Accept: application/json

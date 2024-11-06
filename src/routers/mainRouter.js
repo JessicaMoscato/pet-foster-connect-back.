@@ -2,14 +2,16 @@
 import { Router } from "express";
 import { errorHandler } from '../middlewares/errorhandle.js'; // Importation du gestionnaire d'erreurs global
 import  HttpError  from "../middlewares/httperror.js"; // Importation de la classe d'erreur HTTP personnalisée
+import withTryCatch from "../controllers/withTryCatchController.js";
 
 import { router as animalRouter } from "./animalRouter.js"; // Importation du routeur secondaire animalRouter
 import { router as askRouter } from "./askRouter.js"; // Importation du routeur secondaire askRouter
 import { router as associationRouter } from "./associationRouter.js"; // Importation du routeur secondaire associationRouter
 import { router as familyRouter } from "./familyRouter.js"; // Importation du routeur secondaire familyRouter
 import { router as userRouter } from "./userRouter.js"; // Importation du routeur secondaire userRouter
-import { router as signinRouter } from "./signinRouter.js"; // Importation du routeur secondaire signinRouter
 
+import { signinController } from "../controllers/signinController.js"; // Importation du Controller signinController pour la connexion
+import { signupController } from "../controllers/signupController.js"; // Importation du Controller signupController pour l'inscription
 
 
 const router = Router();
@@ -20,7 +22,9 @@ router.use("/animal", animalRouter); // toutes les routes commencant par /animal
 router.use("/ask", askRouter); // toutes les routes commencant par /ask seront traitées par askRouter
 router.use("/family", familyRouter); // toutes les routes commencant par /family seront traitées par familyRouter
 router.use("/user", userRouter);// toutes les routes commencant par /user seront traitées par userRouter
-router.use("/signin", signinRouter);// toutes les routes commencant par /signin seront traitées par signinRouter
+
+router.post("/signin", withTryCatch(signinController.signinUser)); // Connexion
+router.post("/signup", withTryCatch(signupController.signupUser)); // Inscription
 
 
 // !Middleware pour gérer les routes non trouvées

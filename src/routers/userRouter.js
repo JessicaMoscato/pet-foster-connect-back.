@@ -6,8 +6,9 @@ import { userController } from "../controllers/userController.js";
 
 export const router = Router();
 
+
 router.get("/", withTryCatch(userController.getAllUsers)); // Route pour lister tous les utilisateurs
-router.post("/", withTryCatch(userController.createUser)); // Route pour créer un nouvel utilisateur
+router.post("/", withTryCatch(userController.createUser)); // Route pour créer un nouvel utilisateur //!a effacer
 router.patch("/:id", withTryCatch(userController.patchUser)); // Route pour modifier un utilisateur par son ID
 router.delete("/:id", withTryCatch(userController.deleteUser)); // Route pour supprimer un utilisateur par son ID
 
