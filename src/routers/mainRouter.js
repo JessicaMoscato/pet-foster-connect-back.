@@ -25,11 +25,11 @@ router.use("/signin", signinRouter);// toutes les routes commencant par /signin 
 
 // !Middleware pour gérer les routes non trouvées
 router.use((req, res, next)=>{
-  next(new HttpError(404, "Resource not found")); // Crée une erreur 404 pour toute route non gérée
+  next(new HttpError(404, "Resource not found")); 
 });
 
 // !Middleware de gestion globale des erreurs
-router.use(errorHandler); // Utilise le gestionnaire d'erreurs global pour traiter toutes les erreurs
+router.use(errorHandler); 
 
 
-export default router; // Exportation par défaut du routeur
+export default router; 
