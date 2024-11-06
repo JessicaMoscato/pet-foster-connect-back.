@@ -32,28 +32,33 @@ Animal.belongsTo(Association, {
 User.hasOne(Family, {
   foreignKey: "id_user", // clé étrangère dans family
   as: "family", // alias pour la relation
+  onDelete: "cascade", // suppression en cascade
 });
 
 Family.belongsTo(User, {
   foreignKey: "id_user", // clé étrangère dans family
   as: "user", // alias pour la relation
+  onDelete: "cascade", // suppression en cascade
 });
 
 //! Un utilisateur peut être associé à une association
 User.hasOne(Association, {
   foreignKey: "id_user", // clé étrangère dans association
   as: "association", // alias pour la relation
+  onDelete: "cascade", // suppression en cascade
 });
 
 Association.belongsTo(User, {
   foreignKey: "id_user", // clé étrangère dans association
   as: "user", // alias pour la relation
+  onDelete: "cascade", // suppression en cascade
 });
 
 //! Une famille peut faire plusieurs demandes (ask)
 Family.hasMany(Ask, {
   foreignKey: "id_family", // clé étrangère dans Ask
   as: "asks", // alias pour la relation
+  onDelete: "cascade", // suppression en cascade
 });
 
 Ask.belongsTo(Family, {
@@ -65,6 +70,7 @@ Ask.belongsTo(Family, {
 Animal.hasMany(Ask, {
   foreignKey: "id_animal", // clé étrangère dans Ask
   as: "asks", // alias pour la relation
+  onDelete: "cascade", // suppression en cascade
 });
 
 Ask.belongsTo(Animal, {

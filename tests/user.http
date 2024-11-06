@@ -4,7 +4,7 @@ GET http://localhost:3000/api/user
 Content-Type: application/json
 
 ### effacer un utilisateur
-DELETE http://localhost:3000/api/user/32
+DELETE http://localhost:3000/api/user/20
 Accept: application/json
 
 ### Créer un nouvel utilisateur sans info family ou association

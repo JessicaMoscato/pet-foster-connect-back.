@@ -36,15 +36,15 @@ Family.init(
     },
     number_of_children: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      
     },
     number_of_animals: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+   
     },
     garden: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+    
     },
     description: {
       type: DataTypes.TEXT,

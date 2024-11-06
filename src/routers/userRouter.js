@@ -4,13 +4,17 @@ import { Router } from "express";
 import withTryCatch from "../controllers/withTryCatchController.js";
 import { userController } from "../controllers/userController.js"; 
 import { validate } from "../validation/validate.js";
-import { createSchema, patchSchema } from "../validation/allUser.js";
+import {  patchSchema } from "../validation/allUser.js";
+import {  isAssociationMiddleware,  isFamilyMiddleware,isAdminMiddleware} from "../middlewares/rightsMiddleware.js";
 
 export const router = Router();
 
 
-router.get("/", withTryCatch(userController.getAllUsers)); // Route pour lister tous les utilisateurs
-router.post("/", withTryCatch(userController.createUser)); // Route pour créer un nouvel utilisateur //!a effacer
-router.patch("/:id", withTryCatch(userController.patchUser)); // Route pour modifier un utilisateur par son ID
-router.delete("/:id", withTryCatch(userController.deleteUser)); // Route pour supprimer un utilisateur par son ID
+router.get("/", withTryCatch(userController.getAllUsers)); // Route pour lister tous les utilisateurs RESTCLient
+
+//* Routes accessibles uniquement aux associations et aux familles d'accueil
+router.patch("/:id", isAssociationMiddleware,isFamilyMiddleware,validate(patchSchema, "body"),withTryCatch(userController.patchUser)); // Route pour modifier un utilisateur par son ID
+
+//* Routes accessibles uniquement aux admin, aux associations et aux familles d’accueil
+router.delete("/:id", isAdminMiddleware,isAssociationMiddleware,isFamilyMiddleware,withTryCatch(userController.deleteUser)); // Route pour supprimer un utilisateur par son ID
 

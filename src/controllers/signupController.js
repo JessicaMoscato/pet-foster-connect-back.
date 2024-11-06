@@ -2,120 +2,112 @@ import User from "../models/user.js";
 import { Scrypt } from "../auth/Scrypt.js";
 import { generateToken } from "../auth/tokenService.js";
 import validator from "validator";
+import Family from "../models/family.js";
+import Association from "../models/association.js";
 
 // Fonction pour valider la complexité du mot de passe
+// doit contenir au moins un chiffre + une majuscule + un caractere spécial + mini 8 caractères
 function validatePassword(password) {
   const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   return regex.test(password);
 }
 
 export const signupController = {
-  //! Méthode pour inscrire un utilisateur (Association ou Family)
   async signupUser(req, res) {
-    const {
-      firstname,
-      lastname,
-      address,
-      postal_code,
-      city,
-      phone,
-      email,
-      password,
-      rna_number,
-      representative,
-      role,
-    } = req.body;
+    const user = req.body;
+    const familyData = req.body.family;
+    const associationData = req.body.association;
 
-    // Vérification des champs obligatoires
-    if (
-      !firstname ||
-      !lastname ||
-      !address ||
-      !postal_code ||
-      !city ||
-      !phone ||
-      !email ||
-      !password ||
-      !role
-    ) {
-      return res.status(400).json({
-        message:
-          "Tous les champs nécessaires (firstname, lastname, address, postal_code, city, phone, email, password, role) sont requis.",
-      });
-    }
-
-    // Vérification de la validité de l'email
-    if (!validator.isEmail(email)) {
+    //! Vérification de la validité de l'email
+    if (!validator.isEmail(user.email)) {
       return res.status(400).json({ message: "Email invalide" });
     }
 
-    // Vérification de la validité du mot de passe
-    if (!validatePassword(password)) {
+    //! Vérification de la validité du mot de passe
+    if (!validatePassword(user.password)) {
       return res.status(400).json({
         message:
           "Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial.",
       });
     }
 
-    // Vérification des champs spécifiques en fonction du rôle
-    if (role === "association") {
-      if (!representative || !rna_number) {
-        return res.status(400).json({
-          message:
-            "Les champs 'representative' et 'rna_number' sont obligatoires pour les associations.",
-        });
-      }
-    }
-
-    if (role === "family") {
-      if (rna_number || representative) {
-        return res.status(400).json({
-          message:
-            "Les champs 'rna_number' et 'representative' ne sont pas requis pour les familles.",
-        });
-      }
-    }
-
     // Vérification si l'utilisateur existe déjà
-    const existingUser = await User.findOne({ where: { email } });
+    const existingUser = await User.findOne({ where: { email: user.email } });
     if (existingUser) {
       return res.status(400).json({ message: "L'email est déjà utilisé" });
     }
 
-    try {
-      // Hachage du mot de passe
-      const hashedPassword =  Scrypt.hash(password);
+    // Hachage du mot de passe
+    const hashedPassword = Scrypt.hash(user.password);
+    
 
-      // Création de l'utilisateur dans la base de données
+    if (associationData) {
+      user.role = "association"; // Si les informations de l'association sont présentes
+      // Vérification des champs obligatoires pour l'
+
       const newUser = await User.create({
-        firstname,
-        lastname,
-        address,
-        postal_code,
-        city,
-        phone,
-        email,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
         password: hashedPassword,
-        role,
-        rna_number: rna_number || null, // Rna_number est requis uniquement pour les associations
-        representative: representative || null, // Le champ "representative" est requis uniquement pour les associations
-      });
+        role: user.role
+      })
 
-      // Génération d'un token pour l'utilisateur
+      const newAssociation= await Association.create({
+        ...associationData,
+        id_user: newUser.id
+      });
+      
+      const userAssociation = {
+        ...newUser.toJSON(),
+        association: newAssociation.toJSON()
+      }
+
+      // Génération du token
       const token = generateToken(newUser);
 
-      // Envoi de la réponse avec un message de succès et les informations nécessaires
       res.status(201).json({
         message: "Inscription réussie",
         token,
-        user: { email: newUser.email, role: newUser.role },
-      });
-    } catch (error) {
-      console.error("Erreur lors de la création de l'utilisateur : ", error);
-      res.status(500).json({
-        message: "Erreur lors de l'inscription de l'utilisateur.",
-        error: error.message,
+        userAssociation
       });
     }
-  },
+
+    if (familyData) {
+      user.role = "family";
+
+      const newUser = await User.create({
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        password: hashedPassword,
+        role: user.role
+      })
+
+      const newFamily = await Family.create({
+        ...familyData,
+        id_user: newUser.id
+      });
+      
+      const userFamily = {
+        ...newUser.toJSON(),
+        family: newFamily.toJSON()
+      }
+
+      // Génération du token
+      const token = generateToken(newUser);
+
+      res.status(201).json({
+        message: "Inscription réussie",
+        token,
+        userFamily
+      })
+    }
+
+    else {
+      throw new HttpError(400, "Merci de bien compléter toutes les informations")
+    }
+
+ 
+  }
 };

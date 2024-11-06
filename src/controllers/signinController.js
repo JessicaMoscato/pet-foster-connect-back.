@@ -18,29 +18,30 @@ export const signinController = {
   async signinUser(req, res) {
     const { email, password } = req.body;
 
+    // Vérification de la présence de l'email et du mot de passe
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ message: "Email et mot de passe sont requis" });
+    }
+
     // Vérification de la validité de l'email
     if (!validator.isEmail(email)) {
       return res.status(400).json({ message: "Email invalide" });
     }
 
-    // Vérification de la validité du mot de passe
-    if (!validatePassword(password)) {
-      return res.status(400).json({
-        message:
-          "Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial.",
-      });
-    }
-
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      return res.status(401).json({ message: "Identifiants invalides" });
+      return res.status(401).json({ message: "Utilisateur non trouvé" });
     }
 
-    const isValidPassword = Scrypt.compare(password, user.password);
+    // Vérification du mot de passe
+    const isValidPassword = await Scrypt.compare(password, user.password);
     if (!isValidPassword) {
-      return res.status(401).json({ message: "Identifiants invalides" });
+      return res.status(401).json({ message: "Mot de passe incorrect" });
     }
 
+    // Génération du token JWT
     const token = generateToken(user);
 
     res.status(200).json({
@@ -49,6 +50,4 @@ export const signinController = {
       user: { email: user.email, role: user.role },
     });
   },
-
-
 };
