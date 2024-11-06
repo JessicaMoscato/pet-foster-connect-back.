@@ -2,7 +2,7 @@
 
 import { Router } from "express";
 import withTryCatch from "../controllers/withTryCatchController.js";
-import { familyController } from "../controllers/familyController.js"; 
+import { familyController } from "../controllers/familyController.js";
 
 export const router = Router();
 

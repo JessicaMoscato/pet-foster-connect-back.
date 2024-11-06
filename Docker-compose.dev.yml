@@ -22,7 +22,7 @@ services:
     image: postgres  # Utilisation de l'image officielle de PostgreSQL
     container_name: pet-foster-connect-db-dev  
     ports:
-      - "5432:5433"
+      - "5433:5433"
     env_file:
       - .env  # Chargement des variables d'environnement à partir du fichier .env
     volumes:

@@ -15,7 +15,7 @@ export const associationController = {
   },
 
   //! Méthode pour obtenir le détail d'une association
-  getAssociationById: async (req, res) => {
+  getAssociationById: async (req, res, next) => {
     const { id: associationId } = req.params; 
     const association = await Association.findByPk(associationId, {
       include: [
