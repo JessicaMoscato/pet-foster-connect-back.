@@ -16,7 +16,7 @@ CREATE TABLE "user" (
   password    VARCHAR(255) NOT NULL,
   created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  role        VARCHAR(50) CHECK (role IN ('family', 'association', 'admin'))
+  role        VARCHAR(50) CHECK (role IN ('family', 'association', 'admin')) 
 );
 
 -- Création de la table des familles

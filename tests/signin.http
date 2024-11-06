@@ -1,0 +1,72 @@
+### Test de connexion avec des identifiants valides
+POST http://localhost:3000/api/signin
+Content-Type: application/json
+
+{
+    "email": "asso915@sxasmple.com",
+    "password": "Assoq@12sssss3" 
+}
+
+### Test de connexion avec des identifiants invalides (mot de passe incorrect)
+POST http://localhost:3000/api/signin
+Content-Type: application/json
+
+{
+    "email": "jessM@gmail.com",
+    "password": "wrongpassword"
+}
+
+### Test de connexion avec un email qui n'existe pas
+POST http://localhost:3000/api/signin
+Content-Type: application/json
+
+{
+    "email": "nonexistent@example.com",
+    "password": "somepassword"
+}
+
+### Test de connexion avec un email vide
+POST http://localhost:3000/api/signin
+Content-Type: application/json
+
+{
+    "email": "",
+    "password": "jess"
+}
+
+### Test de connexion avec un mot de passe vide
+POST http://localhost:3000/api/signin
+Content-Type: application/json
+
+{
+    "email": "jessM@gmail.com",
+    "password": ""
+}
+
+### Test de connexion avec un format d'email invalide
+POST http://localhost:3000/api/signin
+Content-Type: application/json
+
+{
+    "email": "invalid-email",
+    "password": "jess"
+}
+
+### Test de connexion avec des caractères spéciaux dans le mot de passe
+POST http://localhost:3000/api/signin
+Content-Type: application/json
+
+{
+    "email": "asso@example.com",
+    "password": "Asso@123"
+}
+
+###! Test de limite de longueur d'email
+POST http://localhost:3000/api/signin
+Content-Type: application/json
+
+{
+    "email": "a".repeat(255) + "@example.com",
+    "password": "jess"
+}
+
