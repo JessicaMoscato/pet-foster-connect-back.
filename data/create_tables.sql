@@ -16,7 +16,7 @@ CREATE TABLE "user" (
   password    VARCHAR(255) NOT NULL,
   created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  role        VARCHAR(50) CHECK (role IN ('family', 'association', 'admin'))
+  role        VARCHAR(50) CHECK (role IN ('family', 'association', 'admin')) 
 );
 
 -- Création de la table des familles
@@ -26,12 +26,12 @@ CREATE TABLE family (
   postal_code        CHAR(5) NOT NULL, 
   city               VARCHAR(50) NOT NULL, 
   phone              VARCHAR(15) NOT NULL,
-  number_of_children INT NOT NULL,
-  number_of_animals  INT NOT NULL,
-  garden             BOOLEAN NOT NULL,
+  number_of_children INT,
+  number_of_animals  INT,
+  garden             BOOLEAN,
   description        TEXT,
   profile_photo      VARCHAR(255),
-  id_user            INT NOT NULL UNIQUE REFERENCES "user"(id),
+  id_user            INT NOT NULL UNIQUE REFERENCES "user"(id) ON DELETE CASCADE,
   created_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -49,7 +49,7 @@ CREATE TABLE association (
   description        TEXT,
   status             VARCHAR(15) NOT NULL,
   profile_photo      VARCHAR(255),
-  id_user            INT NOT NULL UNIQUE REFERENCES "user"(id),
+  id_user            INT NOT NULL UNIQUE REFERENCES "user"(id)ON DELETE CASCADE,
   created_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -69,15 +69,15 @@ CREATE TABLE animal (
   photo2           VARCHAR(255),
   photo3           VARCHAR(255),
   id_family        INT REFERENCES family(id),
-  id_association   INT NOT NULL REFERENCES association(id),
+  id_association   INT NOT NULL REFERENCES association(id) ON DELETE CASCADE,
   created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Création de la table des demandes entre familles et animaux
 CREATE TABLE ask (
-  id_family  INT REFERENCES family(id),
-  id_animal  INT REFERENCES animal(id),
+  id_family  INT REFERENCES family(id)ON DELETE CASCADE,
+  id_animal  INT REFERENCES animal(id)ON DELETE CASCADE,
   status     VARCHAR(15) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

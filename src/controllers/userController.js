@@ -11,64 +11,7 @@ export const userController = {
     res.status(200).json(users);
   },
 
-  //! créer un nouvel utilisateur
-  createUser: async (req, res) => {
-    const userData = req.body;
-    const familyData = req.body.family;
-    const associationData = req.body.association;
-    
-    if (familyData) {
-      userData.role = "family";
 
-      const newUser = await User.create({
-        firstname: userData.firstname,
-        lastname: userData.lastname,
-        email: userData.email,
-        password: userData.password,
-        role: userData.role
-      })
-
-      const newFamily = await Family.create({
-        ...familyData,
-        id_user: newUser.id
-      });
-      
-      const userFamily = {
-        ...newUser.toJSON(),
-        family: newFamily.toJSON()
-      }
-
-      res.status(201).json(userFamily)
-    }
-    
-    if (associationData) {
-      userData.role = "association";
-
-      const newUser = await User.create({
-        firstname: userData.firstname,
-        lastname: userData.lastname,
-        email: userData.email,
-        password: userData.password,
-        role: userData.role
-      })
-
-      const newAssociation= await Association.create({
-        ...associationData,
-        id_user: newUser.id
-      });
-      
-      const userAssociation = {
-        ...newUser.toJSON(),
-        association: newAssociation.toJSON()
-      }
-
-      res.status(201).json(userAssociation)
-    }
-
-    else {
-      throw new HttpError(400, "Merci de bien compléter toutes les informations")
-    }
-  },
 
   //! Modifier un utilisateur
   patchUser: async (req, res) => {
