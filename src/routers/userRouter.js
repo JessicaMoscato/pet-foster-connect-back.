@@ -4,12 +4,11 @@ import { Router } from "express";
 import withTryCatch from "../controllers/withTryCatchController.js";
 import { userController } from "../controllers/userController.js"; 
 import { validate } from "../validation/validate.js";
-import { createSchema, patchSchema } from "../validation/allUser.js";
+import { patchSchema } from "../validation/allUser.js";
 
 export const router = Router();
 
 router.get("/", withTryCatch(userController.getAllUsers)); // Route pour lister tous les utilisateurs
-router.post("/", validate(createSchema, 'body'), withTryCatch(userController.createUser)); // Route pour créer un nouvel utilisateur
 router.patch("/:id", validate(patchSchema, 'body'), withTryCatch(userController.patchUser)); // Route pour modifier un utilisateur par son ID
 router.delete("/:id", withTryCatch(userController.deleteUser)); // Route pour supprimer un utilisateur par son ID
 

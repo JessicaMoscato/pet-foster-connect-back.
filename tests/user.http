@@ -19,7 +19,7 @@ POST http://localhost:3000/api/user
 Content-Type: application/json
 
 {
-  "firstname": "Charles",
+  "firstname": "Charly",
   "lastname": "CB",
   "email": "utilisateur@example.com",
   "password": "motdepasse123",
@@ -63,14 +63,12 @@ Content-Type: application/json
   "lastname": "M",
   "email": "utilisateur@example.com",
   "password": "motdepasse123",
-  "association": {
-    "rna_number": "W123456791",
-    "representative": "Charles CB",
-    "address": "rue de la pierre frite",
-    "postal_code": "60240",
-    "city": "Paris",
-    "phone": "0123456789"
-  }
+  "rna_number": "W123456794",
+  "representative": "Charles CB",
+  "address": "rue de la pierre frite",
+  "postal_code": "60240",
+  "city": "Paris",
+  "phone": "0123456789"
 }
 
 ### Créer un nouvel utilisateur association avec erreur
@@ -92,12 +90,55 @@ Content-Type: application/json
   }
 }
 
+### Créer un nouvel utilisateur association sans user
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+  "association": {
+    "rna_number": "W123456791",
+    "representative": 98,
+    "address": "rue de la pierre frite",
+    "postal_code": "60240",
+    "city": "Paris",
+    "phone": "0123456789"
+  }
+}
+
+### Créer un nouvel utilisateur association et family
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+  "firstname": "Jess",
+  "lastname": "quesadilla",
+  "email": "utilisateur@example.com",
+  "password": "motdepasse123",
+  "family": {
+    "address": "rue de la pierre frite",
+    "postal_code": "60240",
+    "city": "Paris",
+    "phone": "0123456789",
+    "number_of_children": 5,
+    "number_of_animals": 0,
+    "garden": true
+  },
+  "association": {
+    "rna_number": "W123456791",
+    "representative": "la maison de",
+    "address": "rue de la pierre frite",
+    "postal_code": "60240",
+    "city": "Paris",
+    "phone": "0123456789"
+  }
+}
+
 ### Modifier un utilisateur
 PATCH http://localhost:3000/api/user/1
 Content-Type: application/json
 
 {
-  "firstname": "Jeanne",
+  "firstname": "Jean",
   "email": "jeandupont@email.com",
   "password": "hashedpassword11"
  
@@ -108,11 +149,18 @@ PATCH http://localhost:3000/api/user/1
 Content-Type: application/json
 
 {
-  "firstname": "Jean",
-  "email": "jeandupont@email.com",
-  "password": "hashedpassword11",
   "family": {
-    "address": "rue des Quesadillas en folie"
+    "postal_code": "27630"
+  }
+}
+
+### Modifier une association
+PATCH http://localhost:3000/api/user/8
+Content-Type: application/json
+
+{
+  "association": {
+    "address": "rue des Quesadillas en folie de fou"
   }
 }
 
@@ -127,6 +175,60 @@ Content-Type: application/json
  
 }
 
+### Modifier une family avec erreur
+PATCH http://localhost:3000/api/user/1
+Content-Type: application/json
+
+{
+  "firstname": "Jen",
+  "email": "jeandupont@email.com",
+  "password": "hashedpassword11",
+  "family": {
+    "address": 76
+  }
+}
+
+### Modifier une asso avec erreur
+PATCH http://localhost:3000/api/user/8
+Content-Type: application/json
+
+{
+  "firstname": "Jean",
+  "email": "jeandupont@email.com",
+  "password": "hashedpassword11",
+  "association": {
+    "address": 76
+  }
+}
+
+### Modifier une asso et une family en meme chez une famille
+PATCH http://localhost:3000/api/user/1
+Content-Type: application/json
+
+{
+  "firstname": "Sara",
+  "association": {
+    "address": "rue du soleil qui brule"
+  },
+  "family": {
+    "phone": "0111111122"
+  }
+}
+
+### Modifier une asso et une family en meme chez une asso
+PATCH http://localhost:3000/api/user/8
+Content-Type: application/json
+
+{
+  "firstname": "Sara",
+  "association": {
+    "address": "rue du soleil qui brule"
+  },
+  "family": {
+    "phone": "0111111122"
+  }
+}
+
 ### effacer un utilisateur
-DELETE http://localhost:3000/api/user/1
+DELETE http://localhost:3000/api/user/25
 Accept: application/json

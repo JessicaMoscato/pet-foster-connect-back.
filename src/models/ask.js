@@ -42,18 +42,6 @@ Ask.init(
       allowNull: false,
       defaultValue: "en attente",
     },
-
-    // !Date de création
-    created_at: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW, //  date et heure actuelles
-    },
-
-    // !Date de mise à jour
-    updated_at: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW, //  date et heure actuelles
-    },
   },
   {
     sequelize: sequelize,

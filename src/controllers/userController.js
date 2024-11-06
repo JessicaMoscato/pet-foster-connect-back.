@@ -11,67 +11,8 @@ export const userController = {
     res.status(200).json(users);
   },
 
-  //! créer un nouvel utilisateur
-  createUser: async (req, res) => {
-    const userData = req.body;
-    const familyData = req.body.family;
-    const associationData = req.body.association;
-    
-    if (familyData) {
-      userData.role = "family";
-
-      const newUser = await User.create({
-        firstname: userData.firstname,
-        lastname: userData.lastname,
-        email: userData.email,
-        password: userData.password,
-        role: userData.role
-      })
-
-      const newFamily = await Family.create({
-        ...familyData,
-        id_user: newUser.id
-      });
-      
-      const userFamily = {
-        ...newUser.toJSON(),
-        family: newFamily.toJSON()
-      }
-
-      res.status(201).json(userFamily)
-    }
-    
-    if (associationData) {
-      userData.role = "association";
-
-      const newUser = await User.create({
-        firstname: userData.firstname,
-        lastname: userData.lastname,
-        email: userData.email,
-        password: userData.password,
-        role: userData.role
-      })
-
-      const newAssociation= await Association.create({
-        ...associationData,
-        id_user: newUser.id
-      });
-      
-      const userAssociation = {
-        ...newUser.toJSON(),
-        association: newAssociation.toJSON()
-      }
-
-      res.status(201).json(userAssociation)
-    }
-
-    else {
-      throw new HttpError(400, "Merci de bien compléter toutes les informations")
-    }
-  },
-
-  //! Modifier un utilisateur
-  patchUser: async (req, res) => {
+   //! Modifier un utilisateur
+   patchUser: async (req, res) => {
     const userId = req.params.id;
     const updateUser = req.body;
 
@@ -84,39 +25,47 @@ export const userController = {
       throw new HttpError(404, "User not found");
     }
 
-    // Normalisation des champs 
-    if (updateUser.firstname) {
-      updateUser.firstname = updateUser.firstname.trim(); // Retire les espaces
+    const transaction = await sequelize.transaction();
+
+    try{
+  
+      const family = await user.getFamily();
+      if (family) {
+        // Mise à jour des données de la famille du user
+        const familyData = {
+          ...family.get(), // Récupère les données de la famille
+          ...req.body.family,
+          id: family.id,
+        };
+        await family.update(familyData)
+      }
+
+      const association = await user.getAssociation();
+      if (association) {
+        const associationData = {
+          ...association.get(), // Récupère les données de l'association
+          ...req.body.association,
+          id: association.id,
+        };
+        await association.update(associationData)
+      }
+  
+      const userData = {
+        ...user.get(),
+        ...req.body,
+        id: user.id,
+      };
+      await user.update(userData);
+
+      await transaction.commit();
+  
+      res.status(200).json(user);
     }
-    if (updateUser.lastname) {
-      updateUser.lastname = updateUser.lastname.trim(); // Retire les espaces
+    catch(error){
+      await transaction.rollback();
+      throw new HttpError(500, "Error while updating user");
     }
 
-    await user.update(updateUser);
-
-    if (updateUser.family) {
-      const userFamily = await Family.findOne({
-        where: {id_user: userId}
-      });
-      await userFamily.update(updateUser.family)
-    }
-    if (updateUser.association) {
-      const userAssociation =await Association.findOne({
-        where: {id_user: userId}
-      });
-      await userAssociation.update(updateUser.association)
-    }
-
-    const newUser = await User.findByPk(userId, {
-      include: ["association", "family"]
-    })
-    // Met à jour les propriétés de l'utilisateur
-    // Object.assign(user, req.body);
-
-    // Sauvegarde l'utilisateur mis à jour
-    // await user.save();
-
-    res.status(200).json(newUser);
   },
 
   //! Supprimer un utilisateur
@@ -130,63 +79,5 @@ export const userController = {
 
     await selectUser.destroy();
     res.status(204).end();
-  },
-
-  // !Transaction pour la mise à jour des données utilisateur et des relations
-  updateUserWithRelations: async (req, res) => {
-    // Ajout d'une fonction pour la transaction
-    const userId = req.params.id;
-    const user = await User.findByPk(userId, {
-      include: ["association", "family"],
-    });
-
-    if (!user) {
-      throw new HttpError(404, "User not found");
-    }
-
-    const transaction = await sequelize.transaction();
-
-    try {
-      const association = await user.getAssociation();
-      if (association) {
-        // Mise à jour des données de l'association du user
-        const associationData = {
-          ...association.get(), // Récupère les données de l'association
-          ...req.body.association,
-          id: association.id,
-        };
-
-        await association.update(associationData);
-      }
-
-      // refaire la même chose pour Family
-      const family = await user.getFamily();
-      if (family) {
-        // Mise à jour des données de la famille du user
-        const familyData = {
-          ...family.get(), // Récupère les données de la famille
-          ...req.body.family,
-          id: family.id,
-        };
-
-        await family.update(familyData);
-      }
-
-      // Mise à jour sur le User
-      const userData = {
-        ...user.get(), // Récupère les données de l'utilisateur
-        ...req.body.user,
-        id: user.id,
-      };
-
-      await user.update(userData);
-
-      // Valider toutes les modifications en BDD
-      await transaction.commit();
-      res.json(user);
-    } catch (error) {
-      await transaction.rollback();
-      throw new HttpError(500, "Error while updating user");
-    }
   },
 };

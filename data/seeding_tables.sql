@@ -23,7 +23,8 @@ INSERT INTO "user" (lastname, firstname, email, password, role) VALUES
 ('Pichon', 'Louis', 'louis.pichon@email.com', 'hashedpassword21', 'association'),
 ('Morel', 'Lucie', 'lucie.morel@email.com', 'hashedpassword22', 'family'),
 ('Garnier', 'Raphaël', 'raphael.garnier@email.com', 'hashedpassword23', 'association'),
-('David', 'Alice', 'alice.david@email.com', 'hashedpassword24', 'family');
+('David', 'Alice', 'alice.david@email.com', 'hashedpassword24', 'family'),
+('Durand', 'Hugo', 'hugo.durand@email.com', 'password3', 'family');
 
 -- Insertion dans la table "family"
 INSERT INTO family (address, postal_code, city, phone, number_of_children, number_of_animals, garden, description, profile_photo, id_user) VALUES
@@ -39,7 +40,7 @@ INSERT INTO family (address, postal_code, city, phone, number_of_children, numbe
 ('23 Rue de la Mer', '59000', 'Lille', '0634567890', 1, 0, true, 'Famille Bourgeois vivant en bord de mer.', 'images/users/Bourgeoisphilippe-fa.webp', 15),
 ('45 Avenue du Lac', '34000', 'Montpellier', '0645123456', 3, 2, false, 'Famille Vasseur avec des enfants et des animaux.', 'images/users/Vasseurjulien-fa.webp', 17),
 ('67 Boulevard des Jardins', '75014', 'Paris', '0621345678', 2, 1, true, 'Famille Meyer passionnée de jardinage.', 'images/users/Meyerclara-fa.webp', 18),
-('89 Rue des Champs', '69006', 'Lyon', '0656789123', 2, 0, true, 'Famille Aubert avec un grand jardin.', 'images/users/Aubertcecile-fa.webp', 20),
+('89 Rue des Champs', '69006', 'Lyon', '0656789123', 2, 0, true, 'Famille Aubert avec un grand jardin.', 'images/users/Durandhugo-fa.webp', 25),
 ('101 Avenue de la Liberté', '44000', 'Nantes', '0678901235', 3, 2, false, 'Famille Morel avec des animaux exotiques.', 'images/users/Morellouis-fa.webp', 22),
 ('23 Rue des Belles Vues', '38000', 'Grenoble', '0689123456', 0, 0, true, 'Famille David accueillant des voyageurs.', 'images/users/Davidalice-fa.webp', 24);
 
