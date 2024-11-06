@@ -55,7 +55,7 @@ Content-Type: application/json
 }
 
 ### Requête PATCH pour modifier un animal par son ID
-PATCH http://localhost:3000/api/animal/85
+PATCH http://localhost:3000/api/animal/84
 Content-Type: application/json
 
 {
@@ -68,7 +68,7 @@ PATCH http://localhost:3000/api/animal/85
 Content-Type: application/json
 
 {
-  "species": "Chat Chien",
+  "species": "Chien Chat",
   "breed": "expérience raté",
   "gender": "M",
   "size": "petit"
@@ -95,5 +95,5 @@ Content-Type: application/json
 }
 
 ### Requête DELETE pour supprimer un animal par son ID
-DELETE http://localhost:3000/api/animal/115
+DELETE http://localhost:3000/api/animal/85
 Accept: application/json

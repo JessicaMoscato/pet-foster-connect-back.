@@ -4,6 +4,7 @@ import { Router } from "express";
 import withTryCatch from "../controllers/withTryCatchController.js";
 import { userController } from "../controllers/userController.js"; 
 import { validate } from "../validation/validate.js";
+
 import {  patchSchema } from "../validation/allUser.js";
 import {  isAssociationMiddleware,  isFamilyMiddleware,isAdminMiddleware} from "../middlewares/rightsMiddleware.js";
 
@@ -17,4 +18,5 @@ router.patch("/:id", isAssociationMiddleware,isFamilyMiddleware,validate(patchSc
 
 //* Routes accessibles uniquement aux admin, aux associations et aux familles d’accueil
 router.delete("/:id", isAdminMiddleware,isAssociationMiddleware,isFamilyMiddleware,withTryCatch(userController.deleteUser)); // Route pour supprimer un utilisateur par son ID
+
 

@@ -35,27 +35,24 @@ createAnimal: async (req, res) => {
   res.status(201).json(newAnimal); // Renvoie la réponse avec le nouvel animal créé
 },
 
-  //! Modifier un animal
-  patchAnimal: async (req, res) => {
-    const animalId = req.params.id;
-    const selectidAnimal = await Animal.findByPk(animalId);
+//! Modifier un animal
+patchAnimal: async (req, res) => {
+  const animalId = req.params.id;
+  const selectidAnimal = await Animal.findByPk(animalId);
 
-    if (!selectidAnimal) {
-      throw new HttpError(
-        404,
-        "Animal non trouvé. Veuillez vérifier l'animal demandé"
-      );
-    }
-    // Normalisation des champs
-    if (req.body.name) {
-      req.body.name = req.body.name.trim(); // Retire les espaces
-    }
-    Object.assign(selectidAnimal, req.body); // Met à jour les propriétés de l'animal
+  if (!selectidAnimal) {
+    throw new HttpError(
+      404,
+      "Animal non trouvé. Veuillez vérifier l'animal demandé"
+    );
+  }
+  
+  Object.assign(selectidAnimal, req.body); // Met à jour les propriétés de l'animal
 
-    await selectidAnimal.save(); // Sauvegarde l'animal mis à jour
+  await selectidAnimal.save(); // Sauvegarde l'animal mis à jour
 
-    res.status(200).json(selectidAnimal);
-  },
+  res.status(200).json(selectidAnimal);
+},
 
 
   //! Supprimer un animal
