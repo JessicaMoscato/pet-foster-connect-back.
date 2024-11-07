@@ -12,8 +12,9 @@ function validatePassword(password) {
   return regex.test(password);
 }
 
-export const signupController = {
-  async signupUser(req, res) {
+//! Fonction pour créer un utilisateur
+export const createUserController = {
+  async createUser(req, res) {
     const user = req.body;
     const familyData = req.body.family;
     const associationData = req.body.association;

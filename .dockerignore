@@ -1,7 +1,5 @@
 # Dans le .dockerignore, on peut indiquer
 # des dossiers ou fichiers qui doivent ignorés par Docker
-cypress
-doc
+
 node_modules
 
-cypress.config.js
