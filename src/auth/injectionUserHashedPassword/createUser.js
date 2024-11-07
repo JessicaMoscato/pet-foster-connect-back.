@@ -64,8 +64,8 @@ const createUser = async (firstname, lastname, email, password, role) => {
 
 //! Appel de la fonction pour créer un utilisateur par rôle
 
-createUser("Family", "UserFamily", "family@example.com", "Family@123", "family");
-createUser("Asso", "UserAsso", "asso@example.com", "Asso@123", "association");
-createUser("Admin", "UserAdmin", "admin@example.com", "Admin@123", "admin");
+/* createUser("Family", "UserFamily", "family@example.com", "Family@123", "family");
+createUser("Asso", "UserAsso", "asso@example.com", "Asso@123", "association"); */
+createUser("Admin", "Admin", "admin@example.com", "admin", "admin");
 
 

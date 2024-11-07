@@ -6,7 +6,11 @@ export const userController = {
   //! récupérer tous les utilisateurs
   getAllUsers: async (req, res) => {
     const users = await User.findAll({
-      include: ["association", "family"],
+      attributes: {exclude: ["password"]},
+      include: [
+        {association: "association"},
+        {association: "family"}
+        ]
     });
     res.status(200).json(users);
   },
@@ -19,7 +23,11 @@ export const userController = {
     const updateUser = req.body;
 
     const user = await User.findByPk(userId, {
-      include: ["association", "family"], 
+      attributes: {exclude: ["password"]},
+      include: [
+        {association: "association"},
+        {association: "family"}
+      ], 
     });
 
     // Vérifiez si l'utilisateur existe
@@ -51,6 +59,7 @@ export const userController = {
     }
 
     const newUser = await User.findByPk(userId, {
+      attributes: {exclude: ["password"]},
       include: ["association", "family"]
     })
     // Met à jour les propriétés de l'utilisateur

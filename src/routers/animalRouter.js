@@ -3,7 +3,7 @@
 import { Router } from "express";
 import  withTryCatch  from "../controllers/withTryCatchController.js"; // Importation du décorateur de gestion d'erreurs avec try/catch pour middlewares asynchrones
 import { animalController } from "../controllers/animalController.js";  // Importation du Controller animalController
-import { isAssociationMiddleware } from "../middlewares/rightsMiddleware.js"; // Importation du Middleware de vérification des droits
+import { isRoleAuthorizedMiddleware } from "../middlewares/rightsMiddleware.js"; // Importation du Middleware de vérification des droits
 import { verifyToken } from "../auth/verifyToken.js"; // Importation du Middleware de vérification du token
 
 export const router = Router();
@@ -15,8 +15,8 @@ router.get("/:id", withTryCatch(animalController.getAnimalById)); // Route pour 
 
 
 //* Routes accessibles uniquement aux associations
-router.post("/", /* verifyToken,isAssociationMiddleware, */withTryCatch(animalController.createAnimal)); // Route pour créer un nouvel animal
-router.patch("/:id", /* verifyToken,isAssociationMiddleware, */withTryCatch(animalController.patchAnimal)); // Route pour modifier un animal par son ID
-router.delete("/:id", /* verifyToken,isAssociationMiddleware, */withTryCatch(animalController.deleteAnimal)); // Route pour supprimer un animal par son ID
+router.post("/", verifyToken, isRoleAuthorizedMiddleware(["association"]),withTryCatch(animalController.createAnimal)); // Route pour créer un nouvel animal
+router.patch("/:id", verifyToken,isRoleAuthorizedMiddleware(["association"]), withTryCatch(animalController.patchAnimal)); // Route pour modifier un animal par son ID
+router.delete("/:id",  verifyToken, isRoleAuthorizedMiddleware(["association"]),withTryCatch(animalController.deleteAnimal)); // Route pour supprimer un animal par son ID
 
 
