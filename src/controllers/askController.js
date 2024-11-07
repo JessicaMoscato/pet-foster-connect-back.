@@ -8,7 +8,10 @@ export const askController = {
   getAllAsks: async (req, res) => {
     const asks = await Ask.findAll({
       include: [
-        { model: Family, as: "family" }, // Inclut la famille associée à la demande
+        { 
+          model: Family, as: "family",
+          include: {association :"user", attributes: {exclude: ["password"]}}
+         }, // Inclut la famille associée à la demande
         { model: Animal, as: "animal" }, // Inclut l'animal associé à la demande
       ],
     });
@@ -20,8 +23,10 @@ export const askController = {
     const { id: askId } = req.params; 
     const ask = await Ask.findByPk( askId, {
       include: [
-        { model: Family, as: "family" }, // Inclut la famille associée à la demande
-        { model: Animal, as: "animal" }, // Inclut l'animal associé à la demande
+        { model: Family, as: "family",
+          include: {association :"user", attributes: {exclude: ["password"]}}
+        }, // Inclut la famille associée à la demande
+        { model: Animal, as: "animal"}, // Inclut l'animal associé à la demande
       ],
     });
 

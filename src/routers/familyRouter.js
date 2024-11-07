@@ -3,10 +3,12 @@
 import { Router } from "express";
 import withTryCatch from "../controllers/withTryCatchController.js"; // Importation du sélectionrateur de gestion d'erreurs avec try/catch pour middlewares asynchrones
 import { familyController } from "../controllers/familyController.js"; // Importation du Controller familyController
-import { isAssociationMiddleware, isAdminMiddleware } from "../middlewares/rightsMiddleware.js"; // Importation du Middleware de vérification des droits
+import { isRoleAuthorizedMiddleware } from "../middlewares/rightsMiddleware.js"; // Importation du Middleware de vérification des droits
+
+
 
 export const router = Router();
 
 //* Routes accessibles uniquement aux admin et aux associations
-router.get("/", /* isAdminMiddleware, isAssociationMiddleware, */withTryCatch(familyController.getAllFamilies)); // Route pour lister toutes les familles
-router.get("/:id", /* isAdminMiddleware, isAssociationMiddleware, */withTryCatch(familyController.getFamilyById)); // Route pour obtenir le détail d'une famille
+router.get("/", isRoleAuthorizedMiddleware(["admin","Association"]),withTryCatch(familyController.getAllFamilies)); // Route pour lister toutes les familles
+router.get(  "/:id", isRoleAuthorizedMiddleware(["admin", "association"]), withTryCatch(familyController.getFamilyById)); // Route pour obtenir le détail d'une famille

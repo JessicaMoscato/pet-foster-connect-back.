@@ -7,7 +7,7 @@ export const familyController = {
     const families = await Family.findAll({
       include: [
         { association: "animalsFamily" }, // Inclut les animaux associés à chaque famille
-        { association: "user" }, // Inclut les utilisateurs associés à chaque famille
+        { association: "user", attributes: {exclude: ["password"]} }, // Inclut les utilisateurs associés à chaque famille
       ],
     });
     res.status(200).json(families); 
@@ -18,10 +18,8 @@ export const familyController = {
     // Ajout de 'res' comme argument
     const { id: familyId } = req.params; // Extrait l'ID de la famille depuis les paramètres de la requête
     const family = await Family.findByPk(familyId, {
-      include: [
-        { association: "animalsFamily" }, 
-        { association: "user" }
-      ],
+      include: [{ association: "animalsFamily" }, 
+                { association: "user", attributes: {exclude: ["password"]} }],
     });
 
     if (!family) {
