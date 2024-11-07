@@ -14,6 +14,7 @@ export const router = Router();
 
 //* Routes publiques
 router.get("/", withTryCatch(userController.getAllUsers)); // Route pour lister tous les utilisateurs RESTCLient
+router.get("/:id", withTryCatch(userController.getOneUser));
 router.post ("/", validate (createSchema, "body"), withTryCatch(createUserController.createUser)); // Route pour ajouter un nouvel utilisateur
 
 

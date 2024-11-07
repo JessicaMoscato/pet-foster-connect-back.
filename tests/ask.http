@@ -6,20 +6,29 @@ GET http://localhost:3000/api/ask
 GET http://localhost:3000/api/ask/1
 
 
+
 ### Créer une nouvelle demande
 POST http://localhost:3000/api/ask
 Content-Type: application/json
 
 {
-  "id_family": 2,
-  "id_animal": 10
+  "id_family": 3,
+  "id_animal": 11
 }
 
 
 ### Modifier une demande
-PATCH http://localhost:3000/api/ask/
+PATCH http://localhost:3000/api/ask/3
 Content-Type: application/json
 
 {
-  "status": "en cours"
+  "status": "En cours"
+}
+
+### Spprimer une demande
+PATCH http://localhost:3000/api/ask/3
+Content-Type: application/json
+
+{
+  "status": "rejeté"
 }

@@ -18,16 +18,17 @@ export const askController = {
   //! Méthode pour lister une seule demande
   getAskById: async (req, res) => {
     const { id: askId } = req.params; 
-    const ask = await Ask.findByPk(askId, {
+    const ask = await Ask.findByPk( askId, {
       include: [
         { model: Family, as: "family" }, // Inclut la famille associée à la demande
         { model: Animal, as: "animal" }, // Inclut l'animal associé à la demande
       ],
     });
 
-    if (!ask) {
+    if ( !askId ) {
       return res.status(404).json({ error: "Request not found." }); 
     }
+
     res.status(200).json(ask); 
   },
 
@@ -40,13 +41,18 @@ export const askController = {
   //! Méthode pour modifier une demande
   patchAsk: async (req, res) => {
     const { id: askId } = req.params; 
-    const ask = await Ask.findByPk(askId); 
+    const newStatut = (req.body.status).toLowerCase();
+    const ask = await Ask.findByPk(askId);
 
     if (!ask) {
       throw new HttpError(404, "Request not found."); 
     }
-    Object.assign(ask, req.body); // Mise à jour des données de la demande
+
+  
+    // ask.status = req.body.status;
+    Object.assign(ask, newStatut); // Mise à jour des données de la demande
     await ask.save(); // Enregistrement de la nouvelle demande
     res.status(200).json(ask); // Envoie de la nouvelle demande mise à jour en réponse sous forme de JSON
+    
   },
 };

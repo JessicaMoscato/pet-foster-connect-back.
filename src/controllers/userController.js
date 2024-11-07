@@ -11,6 +11,24 @@ export const userController = {
     res.status(200).json(users);
   },
 
+  getOneUser: async (req, res) => {
+    const userId = req.params.id;
+    const user = await User.findByPk(userId, {
+      include: [
+        {association: "association", attributes: {exclude: ["password"]}},
+        {association: "family", attributes: {exclude: ["password"]}}
+      ]
+    });
+
+    if(!user){
+      throw new HttpError(
+        404,
+        "Utilisateur non trouvé. Veuillez vérifier l'utilisateur demandé"
+      );
+    }
+    res.status(200).json(user);
+  },
+
    //! Modifier un utilisateur
    patchUser: async (req, res) => {
     const userId = req.params.id;

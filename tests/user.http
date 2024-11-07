@@ -1,3 +1,15 @@
+### Visulaiser tous les utilisateurs
+GET http://localhost:3000/api/user
+Content-Type: application/json
+
+### Visulaiser un utilisateur
+GET http://localhost:3000/api/user/20
+Content-Type: application/json
+
+### Visulaiser un utilisateur qui n'existe pas
+GET http://localhost:3000/api/user/1000
+Content-Type: application/json
+
 ### Requête pour tester l'inscription  pour un utilisateur de type "family"
 POST http://localhost:3000/api/user 
 Content-Type: application/json
@@ -34,9 +46,6 @@ Content-Type: application/json
   }
 
 }
-### Visulaiser tous les utilisateurs
-GET http://localhost:3000/api/user
-Content-Type: application/json
 
 ### effacer un utilisateur
 DELETE http://localhost:3000/api/user/26
