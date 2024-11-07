@@ -36,35 +36,19 @@ Family.init(
     },
     number_of_children: {
       type: DataTypes.INTEGER,
-      
     },
     number_of_animals: {
       type: DataTypes.INTEGER,
-   
     },
     garden: {
       type: DataTypes.BOOLEAN,
-    
     },
     description: {
       type: DataTypes.TEXT,
     },
     profile_photo: {
       type: DataTypes.STRING,
-      // allowNull: false,
-      // unique: true,
     },
-    //id_user: {
-    //  type: DataTypes.INTEGER,
-    //  allowNull: false,
-    //  unique: true,
-
-      //* pas indispensable
-      /* references: {
-        model: "user", 
-        key: "id", 
-      }, */
-    //},
   },
   {
     sequelize: sequelize,

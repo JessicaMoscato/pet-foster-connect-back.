@@ -23,3 +23,4 @@ router.patch("/:id", /* isAssociationMiddleware,isFamilyMiddleware, */validate(p
 //* Routes accessibles uniquement aux admin, aux associations et aux familles d’accueil
 router.delete("/:id",/*  isAdminMiddleware,isAssociationMiddleware,isFamilyMiddleware, */withTryCatch(userController.deleteUser)); // Route pour supprimer un utilisateur par son ID
 
+

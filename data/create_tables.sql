@@ -49,7 +49,7 @@ CREATE TABLE association (
   description        TEXT,
   status             VARCHAR(15) NOT NULL,
   profile_photo      VARCHAR(255),
-  id_user            INT NOT NULL UNIQUE REFERENCES "user"(id)ON DELETE CASCADE,
+  id_user            INT NOT NULL UNIQUE REFERENCES "user"(id) ON DELETE CASCADE,
   created_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -76,8 +76,8 @@ CREATE TABLE animal (
 
 -- Création de la table des demandes entre familles et animaux
 CREATE TABLE ask (
-  id_family  INT REFERENCES family(id)ON DELETE CASCADE,
-  id_animal  INT REFERENCES animal(id)ON DELETE CASCADE,
+  id_family  INT REFERENCES family(id) ON DELETE CASCADE,
+  id_animal  INT REFERENCES animal(id) ON DELETE CASCADE,
   status     VARCHAR(15) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

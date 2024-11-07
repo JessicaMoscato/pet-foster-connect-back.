@@ -66,13 +66,6 @@ Animal.init(
     photo3: {
       type: DataTypes.STRING,
     },
-    id_association: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    id_family: {
-      type: DataTypes.INTEGER,
-    },
   },
   {
     sequelize: sequelize,
