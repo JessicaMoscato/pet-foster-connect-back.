@@ -2,7 +2,15 @@
 GET http://localhost:3000/api/association
 Accept: application/json
 
+### Requête GET pour récupérer toutes les associations avec erreur
+GET http://localhost:3000/api/associations
+Accept: application/json
+
 ### Requête GET pour récupérer une association par son ID
 GET http://localhost:3000/api/association/10
+Accept: application/json
+
+### Requête GET pour récupérer une association par son ID avec erreur
+GET http://localhost:3000/api/association/1000
 Accept: application/json
 

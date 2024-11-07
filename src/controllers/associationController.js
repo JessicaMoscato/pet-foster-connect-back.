@@ -7,7 +7,7 @@ export const associationController = {
   getAllAssociations: async (req, res) => {
     const associations = await Association.findAll({
       include: [
-        { association: "user" }, // Inclut les animaux associés à chaque association
+        { association: "user", attributes: {exclude: ["password"]}}, // Inclut les animaux associés à chaque association
         { association: "animals" }, // Inclut les utilisateurs associés à chaque association
       ],
     });
@@ -15,11 +15,11 @@ export const associationController = {
   },
 
   //! Méthode pour obtenir le détail d'une association
-  getAssociationById: async (req, res) => {
+  getAssociationById: async (req, res, next) => {
     const { id: associationId } = req.params; 
     const association = await Association.findByPk(associationId, {
       include: [
-        { association: "user" }, // Inclut les animaux associés à chaque association
+        { association: "user", attributes: {exclude: ["password"]} }, // Inclut les animaux associés à chaque association
         { association: "animals" }, // Inclut les utilisateurs associés à chaque association
       ],
     });

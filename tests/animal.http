@@ -3,33 +3,77 @@ GET http://localhost:3000/api/animal
 Accept: application/json
 
 ### Requête GET pour récupérer un animal par son ID
-GET http://localhost:3000/api/animal/10
+GET http://localhost:3000/api/animal/70
 Accept: application/json
 
-### Requête POST pour créer un nouvel animal pour une association
+#-------------Requête POST pour créer un nouvel animal (association)-----
+
+### ! SANS TOKEN
 POST http://localhost:3000/api/animal
 Content-Type: application/json
 
 { 
-  "name": 2,
+  "name": "Janine",
   "species": "Panthera leo",
   "breed": "Berger Allemand",
-  "gender":"M",
+  "gender":"F",
+  "age": 5,
+  "size":"grand",
+  "id_association":1
+
+}
+###* AVEC TOKEN
+POST http://localhost:3000/api/animal
+Authorization: Bearer 
+Content-Type: application/json
+
+{ 
+  "name": "Janine",
+  "species": "Panthera leo",
+  "breed": "Berger Allemand",
+  "gender":"F",
   "age": 5,
   "size":"grand",
   "id_association":1
 
 }
 
-### Requête PATCH pour modifier un animal par son ID
+#---------------------pour modifier un animal par son ID (association)--------------------
+
+###! SANS TOKEN
 PATCH http://localhost:3000/api/animal/85
+Authorization: Bearer 
 Content-Type: application/json
 
 {
-  "name": "Lion modifié",
-  "age": 6
+  "species": "Chat Chien",
+  "breed": "expérience raté",
+  "gender": "M",
+  "size": "petit"
 }
 
-### Requête DELETE pour supprimer un animal par son ID
-DELETE http://localhost:3000/api/animal/101
+###* AVEC TOKEN
+PATCH http://localhost:3000/api/animal/85
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+  "species": "Chat Chien",
+  "breed": "expérience raté",
+  "gender": "M",
+  "size": "petit"
+}
+
+
+#------------Pour supprimer un animal par son ID (association)-----------
+
+
+###! SANS TOKEN
+DELETE http://localhost:3000/api/animal/115
+Accept: application/json
+
+
+###* AVEC TOKEN
+
+DELETE http://localhost:3000/api/animal/115
 Accept: application/json
