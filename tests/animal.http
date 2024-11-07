@@ -42,6 +42,7 @@ Content-Type: application/json
 
 ###! SANS TOKEN
 PATCH http://localhost:3000/api/animal/85
+Authorization: Bearer 
 Content-Type: application/json
 
 {

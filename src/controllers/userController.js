@@ -15,10 +15,8 @@ export const userController = {
     res.status(200).json(users);
   },
 
-
-
-  //! Modifier un utilisateur
-  patchUser: async (req, res) => {
+   //! Modifier un utilisateur
+   patchUser: async (req, res) => {
     const userId = req.params.id;
     const updateUser = req.body;
 

@@ -68,7 +68,17 @@ Content-Type: application/json
   "email": "jeandupont@email.com",
   "password": "password",
   "family": {
-    "address": "rue des Quesadillas en folie"
+    "postal_code": "27630"
+  }
+}
+
+### Modifier une association
+PATCH http://localhost:3000/api/user/8
+Content-Type: application/json
+
+{
+  "association": {
+    "address": "rue des Quesadillas en folie de fou"
   }
 }
 
