@@ -1,10 +1,10 @@
 //! Router secondaire pour les routes liées aux animaux (prefixe de route : /api/animal)
 
 import { Router } from "express";
-import  withTryCatch  from "../controllers/withTryCatchController.js";
-import { animalController } from "../controllers/animalController.js"; 
-import { isAssociationMiddleware } from "../middlewares/rightsMiddleware.js";
-import { verifyToken } from "../auth/verifyToken.js";
+import  withTryCatch  from "../controllers/withTryCatchController.js"; // Importation du décorateur de gestion d'erreurs avec try/catch pour middlewares asynchrones
+import { animalController } from "../controllers/animalController.js";  // Importation du Controller animalController
+import { isAssociationMiddleware } from "../middlewares/rightsMiddleware.js"; // Importation du Middleware de vérification des droits
+import { verifyToken } from "../auth/verifyToken.js"; // Importation du Middleware de vérification du token
 
 export const router = Router();
 
