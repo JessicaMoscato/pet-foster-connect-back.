@@ -1,10 +1,45 @@
+### Requête pour tester l'inscription  pour un utilisateur de type "family"
+POST http://localhost:3000/api/user 
+Content-Type: application/json
 
+{
+  "firstname": "test",
+  "lastname": "UserFamily",
+  "email": "JEss@example.com",
+  "password": "Pamilyo@123",
+  "family":{
+    "address": "123 Main St",
+    "postal_code": "12345",
+    "city": "Paris",
+    "phone": "0123456789"
+  }
+}
+
+### Requête pour tester l'inscription pour un utilisateur de type "association"
+POST http://localhost:3000/api/user 
+Content-Type: application/json
+
+{
+  "firstname": "test",
+  "lastname": "asso",
+  "email": "asso915@sxasmple.com",
+  "password": "Assoq@12sssss3",
+  "association":{
+    "address": "123 Main St",
+    "postal_code": "12345",
+    "city": "Paris",
+    "phone": "0123456789",
+    "rna_number": "W123759658",
+    "representative": "asso"
+  }
+
+}
 ### Visulaiser tous les utilisateurs
 GET http://localhost:3000/api/user
 Content-Type: application/json
 
 ### effacer un utilisateur
-DELETE http://localhost:3000/api/user/20
+DELETE http://localhost:3000/api/user/26
 Accept: application/json
 
 ### Créer un nouvel utilisateur sans info family ou association
