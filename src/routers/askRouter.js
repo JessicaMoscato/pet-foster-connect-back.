@@ -8,10 +8,10 @@ import {isAssociationMiddleware,  isFamilyMiddleware,} from "../middlewares/righ
 export const router = Router();
 
 //* Routes accessibles uniquement aux associations
-router.get("/", isAssociationMiddleware,withTryCatch(askController.getAllAsks)); // Route pour lister toutes les demandes
-router.get("/:id", isAssociationMiddleware,withTryCatch(askController.getAskById)); // Route pour obtenir le détail d'une demande
-router.patch("/:id", isAssociationMiddleware,withTryCatch(askController.patchAsk)); // Route pour modifier une demande
+router.get("/", /*isAssociationMiddleware,*/ withTryCatch(askController.getAllAsks)); // Route pour lister toutes les demandes
+router.get("/:id", /*isAssociationMiddleware,*/ withTryCatch(askController.getAskById)); // Route pour obtenir le détail d'une demande
+router.patch("/:id", /*isAssociationMiddleware,*/ withTryCatch(askController.patchAsk)); // Route pour modifier une demande
 
 //* Routes accessibles uniquement aux familles d'accueil
-router.post("/", isFamilyMiddleware,withTryCatch(askController.createAsk)); // Route pour créer une nouvelle demande
+router.post("/", /*isFamilyMiddleware,*/ withTryCatch(askController.createAsk)); // Route pour créer une nouvelle demande
 

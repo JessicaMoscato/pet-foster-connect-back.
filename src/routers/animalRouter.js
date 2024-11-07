@@ -15,8 +15,8 @@ router.get("/:id", withTryCatch(animalController.getAnimalById)); // Route pour 
 
 
 //* Routes accessibles uniquement aux associations
-router.post("/", verifyToken,isAssociationMiddleware,withTryCatch(animalController.createAnimal)); // Route pour créer un nouvel animal
-router.patch("/:id", verifyToken,isAssociationMiddleware,withTryCatch(animalController.patchAnimal)); // Route pour modifier un animal par son ID
-router.delete("/:id", verifyToken,isAssociationMiddleware,withTryCatch(animalController.deleteAnimal)); // Route pour supprimer un animal par son ID
+router.post("/", /*verifyToken, isAssociationMiddleware,*/withTryCatch(animalController.createAnimal)); // Route pour créer un nouvel animal
+router.patch("/:id", /*verifyToken, isAssociationMiddleware,*/withTryCatch(animalController.patchAnimal)); // Route pour modifier un animal par son ID
+router.delete("/:id", /*verifyToken, isAssociationMiddleware,*/withTryCatch(animalController.deleteAnimal)); // Route pour supprimer un animal par son ID
 
 

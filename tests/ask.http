@@ -11,13 +11,13 @@ POST http://localhost:3000/api/ask
 Content-Type: application/json
 
 {
-  "id_family": 1,
+  "id_family": 2,
   "id_animal": 10
 }
 
 
 ### Modifier une demande
-PATCH http://localhost:3000/api/ask/1
+PATCH http://localhost:3000/api/ask/
 Content-Type: application/json
 
 {

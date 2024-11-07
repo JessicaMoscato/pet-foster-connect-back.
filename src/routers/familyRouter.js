@@ -8,5 +8,5 @@ import { isAssociationMiddleware, isAdminMiddleware } from "../middlewares/right
 export const router = Router();
 
 //* Routes accessibles uniquement aux admin et aux associations
-router.get("/", isAdminMiddleware, isAssociationMiddleware,withTryCatch(familyController.getAllFamilies)); // Route pour lister toutes les familles
-router.get("/:id", isAdminMiddleware, isAssociationMiddleware,withTryCatch(familyController.getFamilyById)); // Route pour obtenir le détail d'une famille
+router.get("/", /*isAdminMiddleware,isAssociationMiddleware,*/ withTryCatch(familyController.getAllFamilies)); // Route pour lister toutes les familles
+router.get("/:id", /*isAdminMiddleware,isAssociationMiddleware,*/ withTryCatch(familyController.getFamilyById)); // Route pour obtenir le détail d'une famille
