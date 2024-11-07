@@ -1,19 +1,32 @@
-### Requête GET pour récupérer toutes les familles
+# Toker famille eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzAsImVtYWlsIjoidGVzdEZhbWlseWQyQGV4YW1wbGUuY29tIiwicm9sZSI6ImZhbWlseSIsImlhdCI6MTczMDk4MzE0NywiZXhwIjoxNzMwOTg2NzQ3fQ.0EEraE-Y-OnGXOtfj_2gdgcMNA0ZzJcJhH4wWDgEcTk
+# Token association eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsImVtYWlsIjoiYXNzbzkxMTUyNTVAc3hhc21wbGUuY29tIiwicm9sZSI6ImFzc29jaWF0aW9uIiwiaWF0IjoxNzMwOTgzMjA3LCJleHAiOjE3MzA5ODY4MDd9.2mSVcFkl85pRXg_GhaubUtQ5KDsnY0k3irHOKFOry_o
+#token admin
+
+### ---------Récupérer toutes les familles-(admin asso)--------------
+#! SANS TOKEN
 GET http://localhost:3000/api/family
 Accept: application/json
 
-### Requête GET pour récupérer toutes les familles avec erreur
-GET http://localhost:3000/api/familly
+
+###* AVEC TOKEN
+GET http://localhost:3000/api/family
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsImVtYWlsIjoiYXNzbzkxMTUyNTVAc3hhc21wbGUuY29tIiwicm9sZSI6ImFzc29jaWF0aW9uIiwiaWF0IjoxNzMwOTgzMjA3LCJleHAiOjE3MzA5ODY4MDd9.2mSVcFkl85pRXg_GhaubUtQ5KDsnY0k3irHOKFOry_o
 Accept: application/json
 
-### Requête GET pour récupérer une famille par son ID
+#----------------Récupérer une famille par son ID (admin asso)----------------
+
+###! SANS TOKEN
 GET http://localhost:3000/api/family/10
 Accept: application/json
 
-### Requête GET pour récupérer une famille par son ID avec erreur
-GET http://localhost:3000/api/family/1000
+
+### AVEC TOKEN
+GET http://localhost:3000/api/family/10
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsImVtYWlsIjoiYXNzbzkxMTUyNTVAc3hhc21wbGUuY29tIiwicm9sZSI6ImFzc29jaWF0aW9uIiwiaWF0IjoxNzMwOTgzMjA3LCJleHAiOjE3MzA5ODY4MDd9.2mSVcFkl85pRXg_GhaubUtQ5KDsnY0k3irHOKFOry_o
 Accept: application/json
 
-### Requête GET pour récupérer une famille par son ID en string
-GET http://localhost:3000/api/family/famille
-Accept: application/json
+
+
+
+
+

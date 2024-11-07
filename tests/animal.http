@@ -3,14 +3,12 @@ GET http://localhost:3000/api/animal
 Accept: application/json
 
 ### Requête GET pour récupérer un animal par son ID
-GET http://localhost:3000/api/animal/85
+GET http://localhost:3000/api/animal/70
 Accept: application/json
 
-###
-GET http://localhost:3000/api/animal/1000
-Accept: application/json
+#-------------Requête POST pour créer un nouvel animal (association)-----
 
-### Requête POST pour créer un nouvel animal pour une association
+### ! SANS TOKEN
 POST http://localhost:3000/api/animal
 Content-Type: application/json
 
@@ -24,76 +22,58 @@ Content-Type: application/json
   "id_association":1
 
 }
-
-### Requête POST pour créer un nouvel animal avec erreur sur le nom
+###* AVEC TOKEN
 POST http://localhost:3000/api/animal
+Authorization: Bearer 
 Content-Type: application/json
 
 { 
-  "name": 2,
+  "name": "Janine",
   "species": "Panthera leo",
   "breed": "Berger Allemand",
-  "gender":"M",
+  "gender":"F",
   "age": 5,
   "size":"grand",
   "id_association":1
 
 }
 
-### Requête POST pour créer un nouvel animal avec erreur
-POST http://localhost:3000/api/animal
-Content-Type: application/json
+#---------------------pour modifier un animal par son ID (association)--------------------
 
-{ 
-  "name": "janine",
-  "species": 56,
-  "breed": true,
-  "gender":"MFHG",
-  "age": "1 an",
-  "size":"grand",
-  "id_association":765
-}
-
-### Requête PATCH pour modifier un animal par son ID
-PATCH http://localhost:3000/api/animal/84
-Content-Type: application/json
-
-{
-  "name": "Lion modifié",
-  "age": 6
-}
-
-### Requête PATCH pour modifier un animal par son ID
+###! SANS TOKEN
 PATCH http://localhost:3000/api/animal/85
+Authorization: Bearer 
 Content-Type: application/json
 
 {
-  "species": "Chien Chat",
+  "species": "Chat Chien",
   "breed": "expérience raté",
   "gender": "M",
   "size": "petit"
 }
 
-### Requête PATCH pour modifier un animal par son ID avec erreur
+###* AVEC TOKEN
 PATCH http://localhost:3000/api/animal/85
+Authorization: Bearer 
 Content-Type: application/json
 
 {
-  "name": 76,
-  "species": true,
+  "species": "Chat Chien",
   "breed": "expérience raté",
-  "gender": "Mjh",
-  "age": true,
-  "size": 65
+  "gender": "M",
+  "size": "petit"
 }
 
-### Requête PATCH pour modifier un animal par son ID sans modif
-PATCH http://localhost:3000/api/animal/85
-Content-Type: application/json
 
-{
-}
+#------------Pour supprimer un animal par son ID (association)-----------
 
-### Requête DELETE pour supprimer un animal par son ID
-DELETE http://localhost:3000/api/animal/85
+
+###! SANS TOKEN
+DELETE http://localhost:3000/api/animal/115
+Accept: application/json
+
+
+###* AVEC TOKEN
+
+DELETE http://localhost:3000/api/animal/115
 Accept: application/json

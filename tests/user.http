@@ -4,9 +4,9 @@ Content-Type: application/json
 
 {
   "firstname": "test",
-  "lastname": "UserFamily",
-  "email": "JEss@example.com",
-  "password": "Pamilyo@123",
+  "lastname": "FAmilyTest",
+  "email": "testFamqsilyd2@example.com",
+  "password": "Family@123",
   "family":{
     "address": "123 Main St",
     "postal_code": "12345",
@@ -22,172 +22,51 @@ Content-Type: application/json
 {
   "firstname": "test",
   "lastname": "asso",
-  "email": "asso915@sxasmple.com",
+  "email": "asso9115255@sxasmple.com",
   "password": "Assoq@12sssss3",
   "association":{
     "address": "123 Main St",
     "postal_code": "12345",
     "city": "Paris",
     "phone": "0123456789",
-    "rna_number": "W123759658",
+    "rna_number": "W133759658",
     "representative": "asso"
   }
 
 }
-### Visulaiser tous les utilisateurs
+
+# Toker famille eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzAsImVtYWlsIjoidGVzdEZhbWlseWQyQGV4YW1wbGUuY29tIiwicm9sZSI6ImZhbWlseSIsImlhdCI6MTczMDk4MzE0NywiZXhwIjoxNzMwOTg2NzQ3fQ.0EEraE-Y-OnGXOtfj_2gdgcMNA0ZzJcJhH4wWDgEcTk
+# Token association eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsImVtYWlsIjoiYXNzbzkxMTUyNTVAc3hhc21wbGUuY29tIiwicm9sZSI6ImFzc29jaWF0aW9uIiwiaWF0IjoxNzMwOTgzMjA3LCJleHAiOjE3MzA5ODY4MDd9.2mSVcFkl85pRXg_GhaubUtQ5KDsnY0k3irHOKFOry_o
+### Visualiser tous les utilisateurs
 GET http://localhost:3000/api/user
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsImVtYWlsIjoiYXNzbzkxMTUyNTVAc3hhc21wbGUuY29tIiwicm9sZSI6ImFzc29jaWF0aW9uIiwiaWF0IjoxNzMwOTgzMjA3LCJleHAiOjE3MzA5ODY4MDd9.2mSVcFkl85pRXg_GhaubUtQ5KDsnY0k3irHOKFOry_o
 
-### effacer un utilisateur
-DELETE http://localhost:3000/api/user/26
+
+#------------------Supprimer un utilisateur (asso, family admin)------------------
+
+###! SANS TOKEN
+DELETE http://localhost:3000/api/user/27
+Authorization: Bearer 
 Accept: application/json
 
-### Créer un nouvel utilisateur sans info family ou association
-POST http://localhost:3000/api/user
-Content-Type: application/json
 
-{
-  "firstname": "Jess",
-  "lastname": "M",
-  "email": "utilisateur@example.com",
-  "password": "motdepasse123"
-}
+###* AVEC TOKEN
+DELETE http://localhost:3000/api/user/30
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsImVtYWlsIjoiYXNzbzkxMTUyNTVAc3hhc21wbGUuY29tIiwicm9sZSI6ImFzc29jaWF0aW9uIiwiaWF0IjoxNzMwOTgzMjA3LCJleHAiOjE3MzA5ODY4MDd9.2mSVcFkl85pRXg_GhaubUtQ5KDsnY0k3irHOKFOry_o
+Accept: application/json
 
-### Créer un nouvel utilisateur famille
-POST http://localhost:3000/api/user
-Content-Type: application/json
 
-{
-  "firstname": "Charly",
-  "lastname": "CB",
-  "email": "utilisateur@example.com",
-  "password": "motdepasse123",
-  "family": {
-    "address": "rue de la pierre frite",
-    "postal_code": "60240",
-    "city": "Paris",
-    "phone": "0123456789",
-    "number_of_children": 30,
-    "number_of_animals": 0,
-    "garden": true
-  }
-}
+#------------------Modifier un utilisateur (asso family)---------------------
 
-### Créer un nouvel utilisateur famille avec erreur
-POST http://localhost:3000/api/user
-Content-Type: application/json
-
-{
-  "firstname": "Charles",
-  "lastname": 54,
-  "email": "utilisateur@example.com",
-  "password": "motdepasse123",
-  "family": {
-    "address": "rue de la pierre frite",
-    "postal_code": "60240",
-    "city": "Paris",
-    "phone": "0123456789",
-    "number_of_children": "albert",
-    "number_of_animals": 0,
-    "garden": true
-  }
-}
-
-### Créer un nouvel utilisateur association
-POST http://localhost:3000/api/user
-Content-Type: application/json
-
-{
-  "firstname": "Jess",
-  "lastname": "M",
-  "email": "utilisateur@example.com",
-  "password": "motdepasse123",
-  "rna_number": "W123456794",
-  "representative": "Charles CB",
-  "address": "rue de la pierre frite",
-  "postal_code": "60240",
-  "city": "Paris",
-  "phone": "0123456789"
-}
-
-### Créer un nouvel utilisateur association avec erreur
-POST http://localhost:3000/api/user
-Content-Type: application/json
-
-{
-  "firstname": "Jess",
-  "lastname": true,
-  "email": "utilisateur@example.com",
-  "password": "motdepasse123",
-  "association": {
-    "rna_number": "W123456791",
-    "representative": 98,
-    "address": "rue de la pierre frite",
-    "postal_code": "60240",
-    "city": "Paris",
-    "phone": "0123456789"
-  }
-}
-
-### Créer un nouvel utilisateur association sans user
-POST http://localhost:3000/api/user
-Content-Type: application/json
-
-{
-  "association": {
-    "rna_number": "W123456791",
-    "representative": 98,
-    "address": "rue de la pierre frite",
-    "postal_code": "60240",
-    "city": "Paris",
-    "phone": "0123456789"
-  }
-}
-
-### Créer un nouvel utilisateur association et family
-POST http://localhost:3000/api/user
-Content-Type: application/json
-
-{
-  "firstname": "Jess",
-  "lastname": "quesadilla",
-  "email": "utilisateur@example.com",
-  "password": "motdepasse123",
-  "family": {
-    "address": "rue de la pierre frite",
-    "postal_code": "60240",
-    "city": "Paris",
-    "phone": "0123456789",
-    "number_of_children": 5,
-    "number_of_animals": 0,
-    "garden": true
-  },
-  "association": {
-    "rna_number": "W123456791",
-    "representative": "la maison de",
-    "address": "rue de la pierre frite",
-    "postal_code": "60240",
-    "city": "Paris",
-    "phone": "0123456789"
-  }
-}
-
-### Modifier un utilisateur
+###! SANS TOKEN
 PATCH http://localhost:3000/api/user/1
 Content-Type: application/json
 
 {
   "firstname": "Jean",
   "email": "jeandupont@email.com",
-  "password": "hashedpassword11"
- 
-}
-
-### Modifier une family
-PATCH http://localhost:3000/api/user/1
-Content-Type: application/json
-
-{
+  "password": "password",
   "family": {
     "postal_code": "27630"
   }
@@ -203,72 +82,17 @@ Content-Type: application/json
   }
 }
 
-### Modifier un utilisateur avec erreur
+###* AVEC TOKEN
 PATCH http://localhost:3000/api/user/1
 Content-Type: application/json
-
-{
-  "firstname": 87,
-  "email": "jeandupont@email.com",
-  "password": "hashedpassword11"
- 
-}
-
-### Modifier une family avec erreur
-PATCH http://localhost:3000/api/user/1
-Content-Type: application/json
-
-{
-  "firstname": "Jen",
-  "email": "jeandupont@email.com",
-  "password": "hashedpassword11",
-  "family": {
-    "address": 76
-  }
-}
-
-### Modifier une asso avec erreur
-PATCH http://localhost:3000/api/user/8
-Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsImVtYWlsIjoiYXNzbzkxMTUyNTVAc3hhc21wbGUuY29tIiwicm9sZSI6ImFzc29jaWF0aW9uIiwiaWF0IjoxNzMwOTg3MDUxLCJleHAiOjE3MzA5OTA2NTF9.rinC9j2FxD3Df--nfW6Kwg5EJGkoo11GCB7FRHhzk0M
 
 {
   "firstname": "Jean",
   "email": "jeandupont@email.com",
-  "password": "hashedpassword11",
-  "association": {
-    "address": 76
-  }
-}
-
-### Modifier une asso et une family en meme chez une famille
-PATCH http://localhost:3000/api/user/1
-Content-Type: application/json
-
-{
-  "firstname": "Sara",
-  "association": {
-    "address": "rue du soleil qui brule"
-  },
+  "password": "password",
   "family": {
-    "phone": "0111111122"
+    "address": "rue des Quesadillas en folie"
   }
 }
-
-### Modifier une asso et une family en meme chez une asso
-PATCH http://localhost:3000/api/user/8
-Content-Type: application/json
-
-{
-  "firstname": "Sara",
-  "association": {
-    "address": "rue du soleil qui brule"
-  },
-  "family": {
-    "phone": "0111111122"
-  }
-}
-
-### effacer un utilisateur
-DELETE http://localhost:3000/api/user/25
-Accept: application/json
-
+#---------------------------------------------

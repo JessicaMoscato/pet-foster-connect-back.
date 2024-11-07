@@ -14,8 +14,14 @@ export const animalController = {
     const animalId = req.params.id;
     const animal = await Animal.findByPk(animalId, {
       include: [
-        { association: "family" }, // Relation avec la famille
-        { association: "association" }, // Relation avec l'association
+        { 
+          association: "family",
+          include: {association :"user", attributes: {exclude: ["password"]}}
+        },// Relation avec la famille
+        { 
+          association: "association",
+          include: {association :"user", attributes: {exclude: ["password"]}}
+        }, // Relation avec l'association
       ],
     });
 
