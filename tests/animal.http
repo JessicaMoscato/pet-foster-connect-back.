@@ -53,8 +53,8 @@ Content-Type: application/json
 }
 
 ###* AVEC TOKEN
-PATCH http://localhost:3000/api/animal/85
-Authorization: Bearer 
+PATCH http://localhost:3000/api/animal/70
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsImVtYWlsIjoiYXNzb2NpYXRpb24xM0BleGVtcGxlLmNvbSIsInJvbGUiOiJhc3NvY2lhdGlvbiIsImlhdCI6MTczMTA1NTI1NSwiZXhwIjoxNzMxMDU4ODU1fQ.qDgwKguiVn2nWcqOoz6mLctgAApGAq0auhX5GBJkOFI
 Content-Type: application/json
 
 {

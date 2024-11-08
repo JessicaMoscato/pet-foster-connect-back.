@@ -27,4 +27,22 @@ export const familyController = {
     }
     res.status(200).json(family); 
   },
+
+  patchFamily: async (req, res) => {
+    const familyId = req.params.id;
+    const family = await Family.findByPk(familyId,{
+      attributes: {exclude: "password"},
+      include: "user"
+    });
+
+    if(!family) {
+      return next(new HttpError(404, "Foster family not found")); 
+    }
+
+    res.status(201).json(family)
+  },
+
+  deleteFamily: async (req, res) => {
+
+  }
 };
