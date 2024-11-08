@@ -16,17 +16,29 @@ Accept: application/json
 #----------------Récupérer une famille par son ID (admin asso)----------------
 
 ###! SANS TOKEN
-GET http://localhost:3000/api/family/10
+GET http://localhost:3000/api/family/1
 Accept: application/json
 
 
 ### AVEC TOKEN
 GET http://localhost:3000/api/family/10
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsImVtYWlsIjoiYXNzbzkxMTUyNTVAc3hhc21wbGUuY29tIiwicm9sZSI6ImFzc29jaWF0aW9uIiwiaWF0IjoxNzMwOTgzMjA3LCJleHAiOjE3MzA5ODY4MDd9.2mSVcFkl85pRXg_GhaubUtQ5KDsnY0k3irHOKFOry_o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsImVtYWlsIjoidGVzdEZhbXFzaWx5ZDJAZXhhbXBsZS5jb20iLCJyb2xlIjoiZmFtaWx5IiwiaWF0IjoxNzMxMDU1MzA5LCJleHAiOjE3MzEwNTg5MDl9.KJkzhdIJW_sbf_Fm2envqxrP_GeG8P4LcERjDBJF7Tw
 Accept: application/json
 
+### modification d'une family
+PATCH http://localhost:3000/api/family/20
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDcsImVtYWlsIjoidGVzdEZhbXFzaWx5ZDE1QGV4YW1wbGUuY29tIiwicm9sZSI6ImZhbWlseSIsImlhdCI6MTczMTA3MjAyMiwiZXhwIjoxNzMxMDc1NjIyfQ.d-3CsFJHtswQ3B5D6I1iTOFu7PQsjv20MPEU0jZ5TUI
+Content-Type: application/json
 
+{
+    "address": "rue de Gisors Ouest",
+    "user": {
+        "firstname": "Charles",
+        "password": "CoucouToi383!"
+    }
+}
 
-
-
-
+### Suppression d'une family
+DELETE http://localhost:3000/api/family/26
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDQsImVtYWlsIjoidGVzdEZhbXFzaWx5ZDE0QGV4YW1wbGUuY29tIiwicm9sZSI6ImZhbWlseSIsImlhdCI6MTczMTA2NzMwOSwiZXhwIjoxNzMxMDcwOTA5fQ.-MqHqqAQgUnfaVjICBTcRstv9XEglJDPAidJAhi8tok
+Content-Type: application/json

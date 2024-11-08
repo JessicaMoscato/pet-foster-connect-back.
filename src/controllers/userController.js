@@ -38,7 +38,6 @@ export const userController = {
    patchUser: async (req, res) => {
     const userId = req.params.id;
     const updateUser = req.body;
-    console.log(updateUser.password);
 
     const user = await User.findByPk(userId, {
       attributes: {exclude: ["password"]},

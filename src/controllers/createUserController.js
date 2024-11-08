@@ -64,6 +64,8 @@ export const createUserController = {
         association: newAssociation.toJSON()
       }
 
+      delete userAssociation.password;
+
       // Génération du token
       const token = generateToken(newUser);
 
@@ -94,6 +96,8 @@ export const createUserController = {
         ...newUser.toJSON(),
         family: newFamily.toJSON()
       }
+
+      delete userFamily.password;
 
       // Génération du token
       const token = generateToken(newUser);
