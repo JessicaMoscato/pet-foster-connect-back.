@@ -17,6 +17,7 @@ Accept: application/json
 
 ###! SANS TOKEN
 GET http://localhost:3000/api/family/1
+GET http://localhost:3000/api/family/1
 Accept: application/json
 
 
