@@ -6,12 +6,12 @@ import { familyController } from "../controllers/familyController.js"; // Import
 import { isRoleAuthorizedMiddleware } from "../middlewares/rightsMiddleware.js"; // Importation du Middleware de vérification des droits
 import { validate } from "../validation/validate.js"; // Importation de la fonction de validation
 import { patchSchema } from "../validation/patchFamily.js"; // Importation du schéma de modification d'utilisateur JOI
-
+import { verifyUser } from "../middlewares/verifyUser.js";
 
 export const router = Router();
 
 //* Routes accessibles uniquement aux admin et aux associations
 router.get("/", isRoleAuthorizedMiddleware(["admin","association"]), withTryCatch(familyController.getAllFamilies)); // Route pour lister toutes les familles
 router.get("/:id", isRoleAuthorizedMiddleware(["admin", "association"]), withTryCatch(familyController.getFamilyById)); // Route pour obtenir le détail d'une famille
-router.patch("/:id", isRoleAuthorizedMiddleware(["family"]), validate(patchSchema, "body"), withTryCatch(familyController.patchFamily));
+router.patch("/:id", isRoleAuthorizedMiddleware(["family"]), verifyUser(), validate(patchSchema, "body"), withTryCatch(familyController.patchFamily));
 router.delete("/:id", isRoleAuthorizedMiddleware(["family"]), withTryCatch(familyController.deleteFamily))
