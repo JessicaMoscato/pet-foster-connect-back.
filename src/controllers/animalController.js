@@ -1,11 +1,10 @@
 import Animal from "../models/animal.js";
 import HttpError from "../middlewares/httperror.js";
-import { Op } from "sequelize";
 
 export const animalController = {
   //! Recuperer tous les animaux
   getAllAnimals: async (_, res) => {
-    const animals = await Animal.findAll();
+    const animals = await Animal.findAll({where: {id_family : null}});
     res.json(animals);
   },
 
