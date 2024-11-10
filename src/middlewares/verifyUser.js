@@ -1,9 +1,9 @@
-import {Family} from "../models/index.js";
+import {Association, Family, User} from "../models/index.js";
 
-export function verifyUser () {
+export function verifyFamily () {
     return async function (req, res, next) {
-        const familyId = req.params.id
-        const family = await Family.findByPk(familyId)
+        const familyId = req.params.id;
+        const family = await Family.findByPk(familyId);
         const familyUser = await family.getUser();
         if (familyUser.id !== req.user.id) {
             return res.status(403).json({

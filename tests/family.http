@@ -27,8 +27,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsImVtYWlsI
 Accept: application/json
 
 ### modification d'une family
-PATCH http://localhost:3000/api/family/40
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjAsImVtYWlsIjoidGVzdEZhbXFzaWx5ZDI4QGV4YW1wbGUuY29tIiwicm9sZSI6ImZhbWlseSIsImlhdCI6MTczMTA4NTcyNiwiZXhwIjoxNzMxMDg5MzI2fQ.P2pGS4_qsFro84UC_DiR_tByWc5gXQnJnAwfidLdOfE
+PATCH http://localhost:3000/api/family/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqZWFuLmR1cG9udEBlbWFpbC5jb20iLCJyb2xlIjoiZmFtaWx5IiwiaWF0IjoxNzMxMjU5NTMxLCJleHAiOjE3MzEyNjMxMzF9.fmFTVTGY8Wad-3WtB4HTquC8jRLc0ic0l9XIRoIPbVI
 Content-Type: application/json
 
 {

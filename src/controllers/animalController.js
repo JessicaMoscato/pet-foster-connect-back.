@@ -1,4 +1,4 @@
-import Animal from "../models/animal.js";
+import {Animal, Association} from "../models/index.js";
 import HttpError from "../middlewares/httperror.js";
 
 export const animalController = {
@@ -36,7 +36,10 @@ export const animalController = {
   
   //! Ajouter un animal
 createAnimal: async (req, res) => {
-  const newAnimal = await Animal.create(req.body); // Crée un nouvel animal avec les données fournies dans la requête
+  const association = await Association.findOne({where: {id_user: req.user.id}});
+  const animal = req.body;
+  animal.id_association = association.id
+  const newAnimal = await Animal.create(animal); // Crée un nouvel animal avec les données fournies dans la requête
   res.status(201).json(newAnimal); // Renvoie la réponse avec le nouvel animal créé
 },
 

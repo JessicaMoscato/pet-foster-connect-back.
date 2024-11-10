@@ -3,8 +3,8 @@ POST http://localhost:3000/api/signin
 Content-Type: application/json
 
 {
-    "email": "lucie.morin@email.com",
-    "password": "password" 
+    "email": "jean.dupont@email.com",
+    "password": "Family@123" 
 }
 
 ### Test de connexion avec des identifiants invalides (mot de passe incorrect)

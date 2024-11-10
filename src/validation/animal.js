@@ -13,7 +13,7 @@ export const createSchema = Joi.object({
     photo2: Joi.string(),
     photo3: Joi.string(),
     id_family: Joi.number().integer(),
-    id_association: Joi.number().integer().required()
+    id_association: Joi.number().integer()
 });
 
 export const patchSchema = Joi.object({

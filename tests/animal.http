@@ -3,7 +3,7 @@ GET http://localhost:3000/api/animal
 Accept: application/json
 
 ### Requête GET pour récupérer un animal par son ID
-GET http://localhost:3000/api/animal/70
+GET http://localhost:3000/api/animal/72
 Accept: application/json
 
 #-------------Requête POST pour créer un nouvel animal (association)-----
@@ -24,8 +24,8 @@ Content-Type: application/json
 }
 ###* AVEC TOKEN
 POST http://localhost:3000/api/animal
-Authorization: Bearer 
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZW1haWwiOiJtYXJpZS5sZWZlYnZyZUBlbWFpbC5jb20iLCJyb2xlIjoiYXNzb2NpYXRpb24iLCJpYXQiOjE3MzEyNjE5MTIsImV4cCI6MTczMTI2NTUxMn0.CVJAD8jpQi9bimoPQLAOlCxpoutcn2dNkYuvCWltJqA
 
 { 
   "name": "Janine",
@@ -33,9 +33,7 @@ Content-Type: application/json
   "breed": "Berger Allemand",
   "gender":"F",
   "age": 5,
-  "size":"grand",
-  "id_association":1
-
+  "size":"grand"
 }
 
 #---------------------pour modifier un animal par son ID (association)--------------------
