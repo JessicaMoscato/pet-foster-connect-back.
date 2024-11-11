@@ -45,36 +45,53 @@ createAnimal: async (req, res) => {
 
 //! Modifier un animal
 patchAnimal: async (req, res) => {
+  const association = await Association.findOne({where: {id_user: req.user.id}});
   const animalId = req.params.id;
-  const selectidAnimal = await Animal.findByPk(animalId);
+  const selectedAnimal = await Animal.findByPk(animalId);
 
-  if (!selectidAnimal) {
+  if (!selectedAnimal) {
     throw new HttpError(
       404,
       "Animal non trouvé. Veuillez vérifier l'animal demandé"
     );
   }
+
+  if (association.id !== selectedAnimal.id_association){
+    throw new HttpError(
+      403,
+      "Accès interdit: Vous n'etes pas habilité"
+    );
+  }
   
-  Object.assign(selectidAnimal, req.body); // Met à jour les propriétés de l'animal
+  Object.assign(selectedAnimal, req.body); // Met à jour les propriétés de l'animal
 
-  await selectidAnimal.save(); // Sauvegarde l'animal mis à jour
+  await selectedAnimal.save(); // Sauvegarde l'animal mis à jour
 
-  res.status(200).json(selectidAnimal);
+  res.status(200).json(selectedAnimal);
 },
 
 
   //! Supprimer un animal
   deleteAnimal: async (req, res) => {
+    const association = await Association.findOne({where: {id_user: req.user.id}});
     const animalId = req.params.id;
-    const selectidAnimal = await Animal.findByPk(animalId);
+    const selectedAnimal = await Animal.findByPk(animalId);
 
-    if (!selectidAnimal) {
+    if (!selectedAnimal) {
       throw new HttpError(
         404,
         "Animal non trouvé. Veuillez vérifier l'animal demandé"
       );
     }
-    await selectidAnimal.destroy();
+
+    if (association.id !== selectedAnimal.id_association){
+      throw new HttpError(
+        403,
+        "Accès interdit: Vous n'etes pas habilité"
+      );
+    }
+
+    await selectedAnimal.destroy();
     res.status(204).end();
   },
 };
