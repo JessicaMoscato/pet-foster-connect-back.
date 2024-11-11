@@ -2,6 +2,7 @@ import  Family  from "../models/family.js";
 import sequelize from "../models/client.js";
 import HttpError from "../middlewares/httperror.js";
 import { Scrypt } from "../auth/Scrypt.js";
+import { validatePassword } from "../validation/validatePassword.js";
 
 export const familyController = {
   //! Méthode pour lister les familles d'accueil
@@ -41,6 +42,14 @@ export const familyController = {
 
     if(!family) {
       return next(new HttpError(404, "Foster family not found")); 
+    }
+
+    //! Vérification de la validité du mot de passe
+    if (!validatePassword(user.password)) {
+      return res.status(400).json({
+        message:
+          "Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial.",
+      });
     }
 
     const transaction = await sequelize.transaction();
