@@ -14,4 +14,4 @@ export const router = Router();
 router.get("/", isRoleAuthorizedMiddleware(["admin","association"]), withTryCatch(familyController.getAllFamilies)); // Route pour lister toutes les familles
 router.get("/:id", isRoleAuthorizedMiddleware(["admin", "association"]), withTryCatch(familyController.getFamilyById)); // Route pour obtenir le détail d'une famille
 router.patch("/:id", isRoleAuthorizedMiddleware(["family"]), verifyFamily(), validate(patchSchema, "body"), withTryCatch(familyController.patchFamily));
-router.delete("/:id", isRoleAuthorizedMiddleware(["family"]), withTryCatch(familyController.deleteFamily))
+router.delete("/:id", isRoleAuthorizedMiddleware(["family"]), verifyFamily(), withTryCatch(familyController.deleteFamily))
