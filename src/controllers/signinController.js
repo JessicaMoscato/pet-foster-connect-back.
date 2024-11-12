@@ -18,7 +18,10 @@ const validatePassword = (password) => {
 export const signinController = {
   //! Méthode pour connecter un utilisateur
   async signinUser(req, res) {
-    const { email, password } = req.body;
+    let { email, password } = req.body;
+
+    email = email.trim();
+    password = password.trim();
 
     // Vérification de la présence de l'email et du mot de passe
     if (!email || !password) {
@@ -37,7 +40,7 @@ export const signinController = {
       return res.status(401).json({ message: "Identifiants ou mot de passe incorrect" });
     }
 
-    // Vérification du mot de passe
+    // Vérification du mot de passe et de l'email
     const isValidPassword = await Scrypt.compare(password, user.password);
     if (!isValidPassword) {
       return res
