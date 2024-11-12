@@ -25,13 +25,15 @@ const router = Router();
 //! Routeurs secondaires
 router.use("/association", associationRouter); // toutes les routes commencant par /association seront traitées par associationRouter
 router.use("/animal", animalRouter); // toutes les routes commencant par /animal seront traitées par animalRouter
-router.use("/ask",  verifyToken,  askRouter); // toutes les routes commencant par /ask seront traitées par askRouter
-router.use("/family", verifyToken, familyRouter); // toutes les routes commencant par /family seront traitées par familyRouter
+router.use("/ask",  /* verifyToken,  */ askRouter); // toutes les routes commencant par /ask seront traitées par askRouter
+router.use("/family", /* verifyToken, */ familyRouter); // toutes les routes commencant par /family seront traitées par familyRouter
 router.use("/user", userRouter);// toutes les routes commencant par /user seront traitées par userRouter
 
 //! Routes pour la connexion 
 router.post("/signin", withTryCatch(signinController.signinUser)); // Connexion
 
+//! Route de raffraichissement du token
+router.post("/refresh-token", withTryCatch(signinController.refreshToken));
 
 
 
