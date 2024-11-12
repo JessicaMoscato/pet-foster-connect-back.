@@ -1,0 +1,18 @@
+# Requête pour récupérer un token
+POST http://localhost:3000/api/signin
+Content-Type: application/json
+
+{
+  "email": "sophie.martin@email.com",
+  "password": "password"
+}
+
+
+
+### Requête pour rafraîchir le token
+POST http://localhost:3000/api/refresh-token
+Content-Type: application/json
+
+{
+  "token": "METTRE LE TOKEN  OBTENU ICI"
+}

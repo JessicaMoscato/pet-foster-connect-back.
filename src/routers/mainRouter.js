@@ -32,6 +32,8 @@ router.use("/user", userRouter);// toutes les routes commencant par /user seront
 //! Routes pour la connexion 
 router.post("/signin", withTryCatch(signinController.signinUser)); // Connexion
 
+//! Route de raffraichissement du token
+router.post("/refresh-token", withTryCatch(signinController.refreshToken));
 
 
 
