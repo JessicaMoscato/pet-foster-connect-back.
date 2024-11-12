@@ -17,8 +17,8 @@ Content-Type: application/json
 {
   "firstname": "test",
   "lastname": "FAmilyTest",
-  "email": "testFamqsilyd2@example.com",
-  "password": "Family@123",
+  "email": "testFamqsilyd28@example.com",
+  "password": "Family",
   "family":{
     "address": "123 Main St",
     "postal_code": "12345",
@@ -34,14 +34,14 @@ Content-Type: application/json
 {
   "firstname": "test",
   "lastname": "asso",
-  "email": "association13@exemple.com",
+  "email": "association15@exemple.com",
   "password": "Association1990*",
   "association":{
     "address": "123 Main St",
     "postal_code": "12345",
     "city": "Paris",
     "phone": "0123456789",
-    "rna_number": "W100000001",
+    "rna_number": "W100000003",
     "representative": "asso"
   }
 
@@ -72,7 +72,7 @@ Accept: application/json
 #------------------Modifier un utilisateur (asso family)---------------------
 
 ###! SANS TOKEN
-PATCH http://localhost:3000/api/user/1
+PATCH http://localhost:3000/api/user/34
 Content-Type: application/json
 
 {
@@ -96,12 +96,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsImVtYWlsI
 }
 
 ###* AVEC TOKEN
-PATCH http://localhost:3000/api/user/1
+PATCH http://localhost:3000/api/user/43
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsImVtYWlsIjoidGVzdEZhbXFzaWx5ZDJAZXhhbXBsZS5jb20iLCJyb2xlIjoiZmFtaWx5IiwiaWF0IjoxNzMxMDU1MzA5LCJleHAiOjE3MzEwNTg5MDl9.KJkzhdIJW_sbf_Fm2envqxrP_GeG8P4LcERjDBJF7Tw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImVtYWlsIjoidGVzdEZhbXFzaWx5ZDEzQGV4YW1wbGUuY29tIiwicm9sZSI6ImZhbWlseSIsImlhdCI6MTczMTA2MjM1MCwiZXhwIjoxNzMxMDY1OTUwfQ.Yj-hfePdusMmCHFja3c83nx4tu8JbpJ8lTne547nOLU
 
 {
-  "firstname": "Jean",
+  "firstname": "Jea",
   "email": "jeandupont@email.com",
   "password": "password",
   "family": {

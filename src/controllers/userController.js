@@ -2,6 +2,7 @@ import { User, Family, Association} from "../models/index.js";
 import sequelize from "../models/client.js";
 import HttpError from "../middlewares/httperror.js";
 import { Scrypt } from "../auth/Scrypt.js";
+import { validatePassword } from "../validation/validatePassword.js";
 
 export const userController = {
   //! récupérer tous les utilisateurs
@@ -38,7 +39,6 @@ export const userController = {
    patchUser: async (req, res) => {
     const userId = req.params.id;
     const updateUser = req.body;
-    console.log(updateUser.password);
 
     const user = await User.findByPk(userId, {
       attributes: {exclude: ["password"]},
@@ -51,6 +51,14 @@ export const userController = {
     // Vérifiez si l'utilisateur existe
     if (!user) {
       throw new HttpError(404, "User not found");
+    }
+
+    //! Vérification de la validité du mot de passe
+    if (!validatePassword(user.password)) {
+      return res.status(400).json({
+        message:
+          "Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial.",
+      });
     }
 
     // Hachage du mot de passe

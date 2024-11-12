@@ -3,7 +3,7 @@ GET http://localhost:3000/api/animal
 Accept: application/json
 
 ### Requête GET pour récupérer un animal par son ID
-GET http://localhost:3000/api/animal/70
+GET http://localhost:3000/api/animal/72
 Accept: application/json
 
 #-------------Requête POST pour créer un nouvel animal (association)-----
@@ -24,8 +24,8 @@ Content-Type: application/json
 }
 ###* AVEC TOKEN
 POST http://localhost:3000/api/animal
-Authorization: Bearer 
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZW1haWwiOiJtYXJpZS5sZWZlYnZyZUBlbWFpbC5jb20iLCJyb2xlIjoiYXNzb2NpYXRpb24iLCJpYXQiOjE3MzEzMzg5MzMsImV4cCI6MTczMTM0MjUzM30.yZ1TAAL5b1bIbylR366vjWGZFU3N3Um74hkL-PycVZQ
 
 { 
   "name": "Janine",
@@ -33,9 +33,7 @@ Content-Type: application/json
   "breed": "Berger Allemand",
   "gender":"F",
   "age": 5,
-  "size":"grand",
-  "id_association":1
-
+  "size":"grand"
 }
 
 #---------------------pour modifier un animal par son ID (association)--------------------
@@ -53,14 +51,14 @@ Content-Type: application/json
 }
 
 ###* AVEC TOKEN
-PATCH http://localhost:3000/api/animal/70
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsImVtYWlsIjoiYXNzb2NpYXRpb24xM0BleGVtcGxlLmNvbSIsInJvbGUiOiJhc3NvY2lhdGlvbiIsImlhdCI6MTczMTA1NTI1NSwiZXhwIjoxNzMxMDU4ODU1fQ.qDgwKguiVn2nWcqOoz6mLctgAApGAq0auhX5GBJkOFI
+PATCH http://localhost:3000/api/animal/88
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJzb3BoaWUubWFydGluQGVtYWlsLmNvbSIsInJvbGUiOiJmYW1pbHkiLCJpYXQiOjE3MzEzMzg4MjYsImV4cCI6MTczMTM0MjQyNn0.imn-Ki32lt2Slx8dqMbr-E_pEtmwuhT85YD61OU59Nc
 Content-Type: application/json
 
 {
   "species": "Chat Chien",
   "breed": "expérience raté",
-  "gender": "M",
+  "gender": "F",
   "size": "petit"
 }
 
@@ -75,5 +73,6 @@ Accept: application/json
 
 ###* AVEC TOKEN
 
-DELETE http://localhost:3000/api/animal/115
-Accept: application/json
+DELETE http://localhost:3000/api/animal/87
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJwaWVycmUuZHVib2lzQGVtYWlsLmNvbSIsInJvbGUiOiJhc3NvY2lhdGlvbiIsImlhdCI6MTczMTMzODg1MiwiZXhwIjoxNzMxMzQyNDUyfQ.VPbjuZnf-6sSzv12mP-Mc-NMmteFVRIJYRF1Kce1u2s
