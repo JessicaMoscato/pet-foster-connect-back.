@@ -12,6 +12,7 @@ export const animalController = {
   getAnimalById: async (req, res) => {
     const animalId = req.params.id;
     const animal = await Animal.findByPk(animalId, {
+      where: {id_family : null},
       include: [
         { 
           association: "family",
