@@ -4,13 +4,8 @@ import { generateToken } from "../auth/tokenService.js";
 import validator from "validator";
 import Family from "../models/family.js";
 import Association from "../models/association.js";
+import { validatePassword } from "../validation/validatePassword.js";
 
-// Fonction pour valider la complexité du mot de passe
-// doit contenir au moins un chiffre + une majuscule + un caractere spécial + mini 8 caractères
-function validatePassword(password) {
-  const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  return regex.test(password);
-}
 
 //! Fonction pour créer un utilisateur
 export const createUserController = {
@@ -64,6 +59,8 @@ export const createUserController = {
         association: newAssociation.toJSON()
       }
 
+      delete userAssociation.password;
+
       // Génération du token
       const token = generateToken(newUser);
 
@@ -94,6 +91,8 @@ export const createUserController = {
         ...newUser.toJSON(),
         family: newFamily.toJSON()
       }
+
+      delete userFamily.password;
 
       // Génération du token
       const token = generateToken(newUser);

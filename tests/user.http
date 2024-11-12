@@ -1,3 +1,15 @@
+### Visulaiser tous les utilisateurs
+GET http://localhost:3000/api/user
+Content-Type: application/json
+
+### Visulaiser un utilisateur
+GET http://localhost:3000/api/user/20
+Content-Type: application/json
+
+### Visulaiser un utilisateur qui n'existe pas
+GET http://localhost:3000/api/user/1000
+Content-Type: application/json
+
 ### Requête pour tester l'inscription  pour un utilisateur de type "family"
 POST http://localhost:3000/api/user 
 Content-Type: application/json
@@ -5,8 +17,8 @@ Content-Type: application/json
 {
   "firstname": "test",
   "lastname": "FAmilyTest",
-  "email": "testFamqsilyd2@example.com",
-  "password": "Family@123",
+  "email": "testFamqsilyd28@example.com",
+  "password": "Family",
   "family":{
     "address": "123 Main St",
     "postal_code": "12345",
@@ -22,14 +34,14 @@ Content-Type: application/json
 {
   "firstname": "test",
   "lastname": "asso",
-  "email": "asso9115255@sxasmple.com",
-  "password": "Assoq@12sssss3",
+  "email": "association15@exemple.com",
+  "password": "Association1990*",
   "association":{
     "address": "123 Main St",
     "postal_code": "12345",
     "city": "Paris",
     "phone": "0123456789",
-    "rna_number": "W133759658",
+    "rna_number": "W100000003",
     "representative": "asso"
   }
 
@@ -60,7 +72,7 @@ Accept: application/json
 #------------------Modifier un utilisateur (asso family)---------------------
 
 ###! SANS TOKEN
-PATCH http://localhost:3000/api/user/1
+PATCH http://localhost:3000/api/user/34
 Content-Type: application/json
 
 {
@@ -75,6 +87,7 @@ Content-Type: application/json
 ### Modifier une association
 PATCH http://localhost:3000/api/user/8
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsImVtYWlsIjoiYXNzb2NpYXRpb24xM0BleGVtcGxlLmNvbSIsInJvbGUiOiJhc3NvY2lhdGlvbiIsImlhdCI6MTczMTA1NTI1NSwiZXhwIjoxNzMxMDU4ODU1fQ.qDgwKguiVn2nWcqOoz6mLctgAApGAq0auhX5GBJkOFI
 
 {
   "association": {
@@ -83,9 +96,23 @@ Content-Type: application/json
 }
 
 ###* AVEC TOKEN
+PATCH http://localhost:3000/api/user/43
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMsImVtYWlsIjoidGVzdEZhbXFzaWx5ZDEzQGV4YW1wbGUuY29tIiwicm9sZSI6ImZhbWlseSIsImlhdCI6MTczMTA2MjM1MCwiZXhwIjoxNzMxMDY1OTUwfQ.Yj-hfePdusMmCHFja3c83nx4tu8JbpJ8lTne547nOLU
+
+{
+  "firstname": "Jea",
+  "email": "jeandupont@email.com",
+  "password": "password",
+  "family": {
+    "address": "rue des Quesadillas en folie"
+  }
+}
+
+###* AVEC TOKEN
 PATCH http://localhost:3000/api/user/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQsImVtYWlsIjoiYXNzbzkxMTUyNTVAc3hhc21wbGUuY29tIiwicm9sZSI6ImFzc29jaWF0aW9uIiwiaWF0IjoxNzMwOTg3MDUxLCJleHAiOjE3MzA5OTA2NTF9.rinC9j2FxD3Df--nfW6Kwg5EJGkoo11GCB7FRHhzk0M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsImVtYWlsIjoidGVzdEZhbXFzaWx5ZDJAZXhhbXBsZS5jb20iLCJyb2xlIjoiZmFtaWx5IiwiaWF0IjoxNzMxMDU1MzA5LCJleHAiOjE3MzEwNTg5MDl9.KJkzhdIJW_sbf_Fm2envqxrP_GeG8P4LcERjDBJF7Tw
 
 {
   "firstname": "Jean",

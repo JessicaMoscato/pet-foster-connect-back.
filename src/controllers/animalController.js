@@ -1,11 +1,10 @@
-import Animal from "../models/animal.js";
+import {Animal, Association} from "../models/index.js";
 import HttpError from "../middlewares/httperror.js";
-import { Op } from "sequelize";
 
 export const animalController = {
   //! Recuperer tous les animaux
   getAllAnimals: async (_, res) => {
-    const animals = await Animal.findAll();
+    const animals = await Animal.findAll({where: {id_family : null}});
     res.json(animals);
   },
 
@@ -13,6 +12,7 @@ export const animalController = {
   getAnimalById: async (req, res) => {
     const animalId = req.params.id;
     const animal = await Animal.findByPk(animalId, {
+      where: {id_family : null},
       include: [
         { 
           association: "family",
@@ -37,42 +37,62 @@ export const animalController = {
   
   //! Ajouter un animal
 createAnimal: async (req, res) => {
-  const newAnimal = await Animal.create(req.body); // Crée un nouvel animal avec les données fournies dans la requête
+  const association = await Association.findOne({where: {id_user: req.user.id}});
+  const animal = req.body;
+  animal.id_association = association.id
+  const newAnimal = await Animal.create(animal); // Crée un nouvel animal avec les données fournies dans la requête
   res.status(201).json(newAnimal); // Renvoie la réponse avec le nouvel animal créé
 },
 
 //! Modifier un animal
 patchAnimal: async (req, res) => {
+  const association = await Association.findOne({where: {id_user: req.user.id}});
   const animalId = req.params.id;
-  const selectidAnimal = await Animal.findByPk(animalId);
+  const selectedAnimal = await Animal.findByPk(animalId);
 
-  if (!selectidAnimal) {
+  if (!selectedAnimal) {
     throw new HttpError(
       404,
       "Animal non trouvé. Veuillez vérifier l'animal demandé"
     );
   }
+
+  if (association.id !== selectedAnimal.id_association){
+    throw new HttpError(
+      403,
+      "Accès interdit: Vous n'etes pas habilité"
+    );
+  }
   
-  Object.assign(selectidAnimal, req.body); // Met à jour les propriétés de l'animal
+  Object.assign(selectedAnimal, req.body); // Met à jour les propriétés de l'animal
 
-  await selectidAnimal.save(); // Sauvegarde l'animal mis à jour
+  await selectedAnimal.save(); // Sauvegarde l'animal mis à jour
 
-  res.status(200).json(selectidAnimal);
+  res.status(200).json(selectedAnimal);
 },
 
 
   //! Supprimer un animal
   deleteAnimal: async (req, res) => {
+    const association = await Association.findOne({where: {id_user: req.user.id}});
     const animalId = req.params.id;
-    const selectidAnimal = await Animal.findByPk(animalId);
+    const selectedAnimal = await Animal.findByPk(animalId);
 
-    if (!selectidAnimal) {
+    if (!selectedAnimal) {
       throw new HttpError(
         404,
         "Animal non trouvé. Veuillez vérifier l'animal demandé"
       );
     }
-    await selectidAnimal.destroy();
+
+    if (association.id !== selectedAnimal.id_association){
+      throw new HttpError(
+        403,
+        "Accès interdit: Vous n'etes pas habilité"
+      );
+    }
+
+    await selectedAnimal.destroy();
     res.status(204).end();
   },
 };

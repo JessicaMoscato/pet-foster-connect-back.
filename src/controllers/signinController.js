@@ -32,13 +32,15 @@ export const signinController = {
 
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      return res.status(401).json({ message: "Utilisateur non trouvé" });
+      return res.status(401).json({ message: "Identifiants ou mot de passe incorrect" });
     }
 
     // Vérification du mot de passe
     const isValidPassword = await Scrypt.compare(password, user.password);
     if (!isValidPassword) {
-      return res.status(401).json({ message: "Mot de passe incorrect" });
+      return res
+        .status(401)
+        .json({ message: "Identifiants ou mot de passe incorrect" });
     }
 
     // Génération du token JWT
