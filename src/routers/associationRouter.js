@@ -16,5 +16,5 @@ export const router = Router();
 router.get("/", withTryCatch(associationController.getAllAssociations)); // Route pour lister toutes les associations
 router.get("/:id", withTryCatch(associationController.getAssociationById)); // Route pour obtenir le détail d'une association
 
-router.patch("/:id",verifyToken, isRoleAuthorizedMiddleware(["association"]), verifyAssociation(), validate(patchSchema, "body"), withTryCatch(associationController.patchAssociation));
-router.delete("/:id",verifyToken, isRoleAuthorizedMiddleware(["association"]), verifyAssociation(), withTryCatch(associationController.deleteAssociation))
+router.patch("/:id",/* verifyToken, isRoleAuthorizedMiddleware(["association"]), verifyAssociation(), */ validate(patchSchema, "body"), withTryCatch(associationController.patchAssociation));
+router.delete("/:id",/* verifyToken, isRoleAuthorizedMiddleware(["association"]), verifyAssociation(), */ withTryCatch(associationController.deleteAssociation))
