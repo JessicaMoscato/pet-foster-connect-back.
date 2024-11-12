@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
     "email": "julien.vasseur@email.com",
-    "password": "passw9ord" 
+    "password": "password" 
 }
 
 ### Test de connexion avec des identifiants invalides (mot de passe incorrect)
